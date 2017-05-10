@@ -2,6 +2,8 @@ require 'test_helper'
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @company = create(:company, :with_admin)
+    sign_in @company.admin
     @project = create(:project)
   end
 

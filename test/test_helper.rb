@@ -18,6 +18,10 @@ class ActiveSupport::TestCase
   end
 end
 
+class ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+end
+
 class Minitest::Spec
   include FactoryGirl::Syntax::Methods
 

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :task do
-    project nil
-    user nil
+    project
+    user
     worked 1.5
     billed 1.5
     description "MyText"
