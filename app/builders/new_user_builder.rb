@@ -25,7 +25,7 @@ class NewUserBuilder
   end
 
   def role
-    return Role.find_by_name('admin') if company.users.size == 1
-    Role.find_by_name('user')
+    return Role.admin if company.users.size == 1
+    Role.user
   end
 end

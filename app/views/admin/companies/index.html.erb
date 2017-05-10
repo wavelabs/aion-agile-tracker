@@ -6,6 +6,8 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Admin</th>
+      <th>Users</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +16,8 @@
     <% @companies.each do |company| %>
       <tr>
         <td><%= company.name %></td>
+        <td><%= company.admin_email %></td>
+        <td><%= company.count_users %></td>
         <td><%= link_to 'Show', company %></td>
         <td><%= link_to 'Edit', edit_company_path(company) %></td>
         <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -24,4 +28,5 @@
 
 <br>
 
-<%= link_to 'New Company', new_company_path %>
+<%= link_to 'New Company', new_company_path %> |
+<%= link_to :dashboard, dashboard_path %>

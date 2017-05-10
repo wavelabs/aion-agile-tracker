@@ -1,10 +1,10 @@
 module Admin
-  class ProjectsController < DashboardController
+  class ProjectsController < BaseController
     before_action :set_project, only: [:show, :edit, :update, :destroy]
 
     # GET /projects
     def index
-      @projects = Project.all
+      @projects = current_company.projects
     end
 
     # GET /projects/1

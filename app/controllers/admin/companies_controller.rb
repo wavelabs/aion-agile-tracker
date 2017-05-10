@@ -1,11 +1,11 @@
 module Admin
-  class CompaniesController < DashboardController
+  class CompaniesController < BaseController
     before_action :set_company, only: [:show, :edit, :update, :destroy]
 
     # GET /companies
     # GET /companies.json
     def index
-      @companies = Company.all
+      @companies = current_user.companies
     end
 
     # GET /companies/1
@@ -25,7 +25,10 @@ module Admin
     # POST /companies
     # POST /companies.json
     def create
-      @company = Company.new(company_params)
+      @company = ::NewCompanyBuilder.new
+                                    .assign_attributes(company_params)
+                                    .add_user(current_user)
+                                    .build
 
       respond_to do |format|
         if @company.save

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :admin, as: '' do
     get 'dashboard', to: 'dashboard#show'
     resources :projects
+    resources :tasks
     resources :companies
   end
 end
