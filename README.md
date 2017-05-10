@@ -1,4 +1,4 @@
-# README #
+# Time Tracker #
 
 ### What is this repository for? ###
 
@@ -10,7 +10,7 @@ Steps to setup the project:
 
 1. Make sure you are using Ruby 2.4.0
 1. Clone the repo.
-1. Configure the database using `DB_USER`, `DB_PASSWORD` env vars for database auth.
+1. Configure your app using `config/application.yml`
 1. Execute `bundle install`
 1. Execute `bundle exec rake db:create`.
 1. Execute `buncle exec rake db:migrate`.
