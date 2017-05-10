@@ -2,7 +2,7 @@ require 'test_helper'
 
 describe NewUserBuilder do
   let(:company_name) { 'Kairos Corp.' }
-  let(:user) { create(:user, company_name: company_name) }
+  let(:user) { build(:user, company_name: company_name) }
 
   subject { NewUserBuilder.new(user) }
 
