@@ -14,7 +14,7 @@ class NewUserBuilder
 
   private
 
-  attr_accessor :model
+  attr_reader :model
 
   def company
     Company.find_or_create_by(name: model.company_name)

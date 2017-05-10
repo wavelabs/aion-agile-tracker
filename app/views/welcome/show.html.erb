@@ -1,5 +1,10 @@
 <h1>Welcome#show</h1>
 <p>Find me in app/views/welcome/show.html.erb</p>
 
-<%= link_to :register, new_user_registration_path %> |
-<%= link_to :login, new_user_session_path %>
+<% if logged_in? %>
+  <%= current_company.name %>
+  <%= link_to :sign_out, destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to :register, new_user_registration_path %> |
+  <%= link_to :login, new_user_session_path %>
+<% end %>

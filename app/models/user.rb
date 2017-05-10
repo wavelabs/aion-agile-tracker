@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :companies_users
+  has_many :companies_users, dependent: :destroy
   has_many :companies, through: :companies_users
 
   attr_accessor :company_name
