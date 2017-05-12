@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: companies_users
+#
+#  id         :integer          not null, primary key
+#  company_id :integer
+#  user_id    :integer
+#  role_id    :integer
+#
+# Indexes
+#
+#  index_companies_users_on_company_id  (company_id)
+#  index_companies_users_on_role_id     (role_id)
+#  index_companies_users_on_user_id     (user_id)
+#
+
 class CompaniesUser < ApplicationRecord
   belongs_to :company
   belongs_to :user
