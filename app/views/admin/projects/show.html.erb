@@ -1,23 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @project.name %></h1>
-
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
-
-<p>
-  <strong>Billed:</strong>
-  <%= @project.billed %>
-</p>
-
-<p>
-  <strong>Worked:</strong>
-  <%= @project.worked %>
-</p>
-
-<%= render 'admin/tasks/index', tasks: @project.tasks %>
+<%= render 'detail' %>
+<%= render 'tasks', tasks: @project.tasks %> <br>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
