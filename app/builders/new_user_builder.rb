@@ -20,12 +20,8 @@ class NewUserBuilder
     Company.find_or_create_by(name: model.company_name)
   end
 
-  def company_user
-    @model.companies_users.first
-  end
-
   def role
-    return Role.admin if company.users.size == 1
+    return Role.admin if company.users.empty?
     Role.user
   end
 end
