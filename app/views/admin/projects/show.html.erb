@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%= render 'detail' %>
+<%= render 'detail', project: @project %>
 <%= render 'tasks', tasks: @project.tasks %> <br>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
