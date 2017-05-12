@@ -1,0 +1,6 @@
+<tr>
+  <td><%= user.email %></td>
+  <td><%= user.role_for(@company).name %></td>
+  <td><%= link_to 'Show', user_profile_path(user) %></td>
+  <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

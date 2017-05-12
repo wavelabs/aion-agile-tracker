@@ -1,0 +1,17 @@
+<fieldset>
+  <legend>Companies (<%= companies.count %>)</legend>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Admin</th>
+        <th>Users</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render collection: companies, as: :company, partial: 'admin/companies/company' %>
+    </tbody>
+  </table>
+</fieldset>

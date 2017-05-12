@@ -1,0 +1,15 @@
+<fieldset>
+  <legend>Projects (<%= @company.projects.count %>)</legend>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Worked</th>
+        <th>Billed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render collection: @company.projects, as: :project, partial: 'admin/projects/project' %>
+    </tbody>
+  </table>
+</fieldset>

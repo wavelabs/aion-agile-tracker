@@ -1,0 +1,2 @@
+module Admin::CompaniesUsersHelper
+end

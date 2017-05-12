@@ -1,0 +1,14 @@
+<fieldset>
+  <legend>Users (<%= @company.companies_users.count %>)</legend>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render collection: @company.companies_users, as: :company_user, partial: 'admin/companies_users/companies_user' %>
+    </tbody>
+  </table>
+</fieldset>

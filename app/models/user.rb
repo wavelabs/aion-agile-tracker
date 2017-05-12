@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :tasks
 
   attr_accessor :company_name
+
+  def role_for(company)
+    companies_users.find_by(company: company).role
+  end
 end
