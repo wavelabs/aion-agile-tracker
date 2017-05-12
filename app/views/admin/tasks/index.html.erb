@@ -2,7 +2,23 @@
 
 <h1>Tasks</h1>
 
-<%= render 'table', tasks: @tasks %>
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>User</th>
+      <th>Worked</th>
+      <th>Billed</th>
+      <th>Date started</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render collection: @tasks, as: :task, partial: 'task' %>
+  </tbody>
+</table>
+
 
 <br>
 

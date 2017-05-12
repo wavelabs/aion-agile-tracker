@@ -1,0 +1,17 @@
+<fieldset>
+  <legend>Detail</legend>
+  <dl>
+    <dt>Project:</dt>
+    <dd><%= link_to task.project_name, task.project %></dd>
+    <dt>User:</dt>
+    <dd><%= link_to task.user_email, user_profile_path(task.user) %></dd>
+    <dt>Worked:</dt>
+    <dd><%= task.worked %></dd>
+    <dt>Billed:</dt>
+    <dd><%= task.billed %></dd>
+    <dt>Description:</dt>
+    <dd><%= task.description %></dd>
+    <dt>Date started:</dt>
+    <dd><%= task.date_started %></dd>
+  </dl>
+</fieldset>

@@ -1,34 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Project:</strong>
-  <%= @task.project %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @task.user %>
-</p>
-
-<p>
-  <strong>Worked:</strong>
-  <%= @task.worked %>
-</p>
-
-<p>
-  <strong>Billed:</strong>
-  <%= @task.billed %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @task.description %>
-</p>
-
-<p>
-  <strong>Date started:</strong>
-  <%= @task.date_started %>
-</p>
+<%= render 'detail', task: @task %> <br>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>

@@ -1,0 +1,13 @@
+<tr>
+  <td>
+    <strong><%= task.project_name %></strong> <br>
+    <em><%= task.description %></em>
+  </td>
+  <td><%= task.user_email %></td>
+  <td><%= task.worked %></td>
+  <td><%= task.billed %></td>
+  <td><%= task.date_started %></td>
+  <td><%= link_to 'Show', task %></td>
+  <td><%= link_to 'Edit', edit_task_path(task) %></td>
+  <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
