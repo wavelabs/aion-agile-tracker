@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<%= render 'detail' %>
-<%= render 'users' %>
-<%= render 'projects' %>
+<%= render 'detail', company: @company %>
+<%= render 'users', companies_users: @company.companies_users %>
+<%= render 'projects', projects: @company.projects %>
 
 <br>
 
