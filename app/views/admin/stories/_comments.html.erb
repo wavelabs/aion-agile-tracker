@@ -1,0 +1,10 @@
+<fieldset>
+  <legend>Comments</legend>
+  <dl>
+    <% comments.each do |comment| %>
+      <dd><%= comment.user_abbr %> says:</dd>
+      <dd><%= markdown(comment.comment) %></dd>
+      <hr>
+    <% end %>
+  </dl>
+</fieldset>

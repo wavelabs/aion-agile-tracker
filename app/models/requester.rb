@@ -24,8 +24,4 @@
 
 class Requester < User
   has_many :stories
-
-  def abbr
-    email.first.upcase
-  end
 end

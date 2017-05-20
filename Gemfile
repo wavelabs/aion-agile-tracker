@@ -16,6 +16,7 @@ gem 'devise', git: 'https://github.com/plataformatec/devise.git', branch: 'maste
 gem 'figaro'
 gem 'redcarpet'
 gem 'acts-as-taggable-on'
+gem 'acts_as_commentable'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

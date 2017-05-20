@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     resources :projects do
       resources :story_types
       resources :story_states
-      resources :stories
+      resources :stories do
+        resources :comments, only: [:create, :update]
+      end
     end
     resources :tasks
     resources :companies

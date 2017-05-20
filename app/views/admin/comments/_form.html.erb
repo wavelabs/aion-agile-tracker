@@ -1,0 +1,11 @@
+<%= form_with model: comment, url: ['', comment.commentable.project, comment.commentable, comment], local: true do |form| %>
+  <div class="field">
+    <%= form.label :comment %>
+    <%= form.text_area :comment, id: :story_comment %>
+    <p class="hint">
+      Markdown sopported
+    </p>
+  </div>
+
+  <%= form.submit %>
+<% end %>

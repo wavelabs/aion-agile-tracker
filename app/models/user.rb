@@ -37,4 +37,8 @@ class User < ApplicationRecord
   def role_for(company)
     companies_users.find_by(company: company).role
   end
+
+  def abbr
+    email.first.upcase
+  end
 end
