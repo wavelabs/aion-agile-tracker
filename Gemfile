@@ -15,6 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'devise', git: 'https://github.com/plataformatec/devise.git', branch: 'master'
 gem 'figaro'
 gem 'redcarpet'
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

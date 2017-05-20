@@ -59,7 +59,7 @@ module Admin
       # Only allow a trusted parameter "white list" through.
       def story_params
         params.require(:story).permit(:title, :description, :points,
-          :requester_id, :story_state_id, :story_type_id)
+          :requester_id, :story_state_id, :story_type_id, :label_list)
       end
 
       def set_project

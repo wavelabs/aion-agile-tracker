@@ -47,6 +47,11 @@
     <%= form.select :story_type_id, story_types.pluck(:display_name, :id), id: :story_type_id %>
   </div>
 
+  <div class="field">
+    <%= form.label :label_list, 'Labels (separated by commas)' %><br/>
+    <%= form.text_field :label_list %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

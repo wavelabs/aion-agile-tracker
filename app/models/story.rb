@@ -21,6 +21,8 @@
 #
 
 class Story < ApplicationRecord
+  acts_as_taggable_on :labels
+
   belongs_to :requester
   delegate :abbr, to: :requester, prefix: true
   belongs_to :story_state
