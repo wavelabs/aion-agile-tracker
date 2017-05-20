@@ -1,0 +1,32 @@
+<%= form_with(model: story_type, local: true) do |form| %>
+  <% if story_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(story_type.errors.count, "error") %> prohibited this story_type from being saved:</h2>
+
+      <ul>
+      <% story_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :story_type_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :display_name %>
+    <%= form.text_field :display_name, id: :story_type_display_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :icon %>
+    <%= form.text_field :icon, id: :story_type_icon %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

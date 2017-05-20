@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Points</th>
+      <th>Requester</th>
+      <th>Story Type</th>
+      <th>State</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stories.each do |story| %>
+      <tr>
+        <td><%= story.title %></td>
+        <td><%= story.description %></td>
+        <td><%= story.points %></td>
+        <td><%= story.requester_id %></td>
+        <td><%= story.state_id %></td>
+        <td><%= link_to 'Show', _project_story_path(@project, story) %></td>
+        <td><%= link_to 'Edit', edit__project_story_path(story) %></td>
+        <td><%= link_to 'Destroy', _project_story_path(@project, story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Story', new__project_story(@project) %>

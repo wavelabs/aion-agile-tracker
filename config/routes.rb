@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'dashboard#show'
     get ':id/profile', to: 'profiles#show', as: :user_profile
     get 'profile', to: 'profiles#show', as: :profile
-    resources :projects
+    resources :projects do
+      resources :story_types
+      resources :story_states
+      resources :stories
+    end
     resources :tasks
     resources :companies
     resources :companies_users, only: [:destroy]

@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'New Story', new__project_story_path(@project) %>
+
 <%= render 'detail', project: @project %>
-<%= render 'tasks', tasks: @project.tasks %> <br>
+<%= render 'stories', stories: @project.stories %> <br>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

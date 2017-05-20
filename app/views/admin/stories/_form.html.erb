@@ -1,0 +1,53 @@
+<%= form_with(model: story, url: _project_stories_path(project), local: true) do |form| %>
+  <% if story.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(story.errors.count, "error") %> prohibited this story from being saved:</h2>
+
+      <ul>
+      <% story.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :story_title %>
+    <p class="hint">
+      As a <strong>WHO?</strong>, I want <strong>WHAT?</strong> so that <strong>WHY?</strong>
+    </p>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :story_description %>
+    <p class="hint">
+      Markdown sopported
+    </p>
+  </div>
+
+  <div class="field">
+    <%= form.label :points %>
+    <%= form.select :points, Story::POINTS, id: :story_points %>
+  </div>
+
+  <div class="field">
+    <%= form.label :requester_id %>
+    <%= form.select :requester_id, requesters.pluck(:email, :id), id: :requester_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state_id %>
+    <%= form.select :story_state_id, story_states.pluck(:display_name, :id), id: :story_state_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :story_type_id %>
+    <%= form.select :story_type_id, story_types.pluck(:display_name, :id), id: :story_type_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

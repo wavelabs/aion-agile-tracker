@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Story Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Display name</th>
+      <th>Icon</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @story_types.each do |story_type| %>
+      <tr>
+        <td><%= story_type.name %></td>
+        <td><%= story_type.display_name %></td>
+        <td><%= story_type.icon %></td>
+        <td><%= link_to 'Show', story_type %></td>
+        <td><%= link_to 'Edit', edit_story_type_path(story_type) %></td>
+        <td><%= link_to 'Destroy', story_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Story Type', new_story_type_path %>

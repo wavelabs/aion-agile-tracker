@@ -5,9 +5,9 @@
     <dd><%= project.name %></dd>
     <dt>Description:</dt>
     <dd><%= project.description %></dd>
-    <dt>Billed:</dt>
-    <dd><%= project.billed %> Hs.</dd>
-    <dt>Worked:</dt>
-    <dd><%= project.worked %> Hs.</dd>
+    <dt>Story States</dt>
+    <dd><%= project.story_states.collect {|ss| ss.display_name }.join(' | ') %></dd>
+    <dt>Story Types</dt>
+    <dd><%= StoryType.all.collect {|st| st.display_name }.join(' | ') %></dd>
   </dl>
 </fieldset>

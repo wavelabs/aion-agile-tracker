@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @story_state.name %>
+</p>
+
+<p>
+  <strong>Display name:</strong>
+  <%= @story_state.display_name %>
+</p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @story_state.icon %>
+</p>
+
+<%= link_to 'Edit', edit_story_state_path(@story_state) %> |
+<%= link_to 'Back', story_states_path %>

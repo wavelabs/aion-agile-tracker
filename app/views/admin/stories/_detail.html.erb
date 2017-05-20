@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<fieldset>
+  <legend>Datail</legend>
+  <dl>
+    <dt>Title:</dt>
+    <dd><%= story.title %></dd>
+    <dt>Description:</dt>
+    <dd><%= markdown(story.description) %></dd>
+    <dt>Points:</dt>
+    <dd><%= story.points %></dd>
+    <dt>Requester:</dt>
+    <dd><%= story.requester_abbr %></dd>
+    <dt>Story Type</dt>
+    <dd><%= story.story_type_display_name %></dd>
+    <dt>State</dt>
+    <dd><%= story.story_state_display_name %></dd>
+  </dl>
+</fieldset>

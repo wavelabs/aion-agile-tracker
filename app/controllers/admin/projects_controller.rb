@@ -22,7 +22,11 @@ module Admin
 
     # POST /projects
     def create
-      @project = current_company.projects.build(project_params)
+      @project = NewProjectBuilder.new
+                                  .assign_company(current_company)
+                                  .add_default_story_states
+                                  .assign_attributes(project_params)
+                                  .build
 
       if @project.save
         redirect_to @project, notice: 'Project was successfully created.'
