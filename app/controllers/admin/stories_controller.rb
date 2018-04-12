@@ -1,10 +1,11 @@
 module Admin
   class StoriesController < ApplicationController
     before_action :set_project
-    before_action :set_story, only: [:show, :edit, :update, :destroy]
-    before_action :set_pickable_requesters, only: [:new, :edit, :create, :update]
+    before_action :set_story,                 only: [:show, :edit, :update, :destroy]
+    before_action :set_pickable_groups,       only: [:new, :edit, :create, :update]
+    before_action :set_pickable_requesters,   only: [:new, :edit, :create, :update]
     before_action :set_pickable_story_states, only: [:new, :edit, :create, :update]
-    before_action :set_pickable_story_types, only: [:new, :edit, :create, :update]
+    before_action :set_pickable_story_types,  only: [:new, :edit, :create, :update]
 
     # GET /stories
     def index
@@ -59,7 +60,7 @@ module Admin
       # Only allow a trusted parameter "white list" through.
       def story_params
         params.require(:story).permit(:title, :description, :points,
-          :requester_id, :story_state_id, :story_type_id, :label_list)
+          :requester_id, :story_state_id, :story_type_id, :label_list, :group_id)
       end
 
       def set_project
@@ -76,6 +77,10 @@ module Admin
 
       def set_pickable_story_types
         @story_types = StoryType.all
+      end
+
+      def set_pickable_groups
+        @groups = @project.groups
       end
   end
 

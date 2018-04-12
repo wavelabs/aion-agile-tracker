@@ -26,6 +26,7 @@ module Admin
                                   .assign_company(current_company)
                                   .add_default_story_states
                                   .assign_attributes(project_params)
+                                  .build_scrum_board
                                   .build
 
       if @project.save

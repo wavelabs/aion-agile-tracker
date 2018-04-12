@@ -12,9 +12,11 @@
 #  project_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  group_id       :integer
 #
 # Indexes
 #
+#  index_stories_on_group_id        (group_id)
 #  index_stories_on_project_id      (project_id)
 #  index_stories_on_story_state_id  (story_state_id)
 #  index_stories_on_story_type_id   (story_type_id)

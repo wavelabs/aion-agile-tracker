@@ -52,6 +52,11 @@
     <%= form.text_field :label_list %>
   </div>
 
+  <div class="field">
+    <%= form.label :group_id %><br/>
+    <%= form.select :group_id, groups.pluck(:name, :id), id: :group_id %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

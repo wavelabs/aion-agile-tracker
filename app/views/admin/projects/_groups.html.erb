@@ -1,0 +1,6 @@
+<% groups.each do |group| %>
+  <fieldset>
+    <legend><%= group.name.titleize %></legend>
+    <%= render 'stories', stories: group.stories %> <br>
+  </fieldset>
+<% end %>

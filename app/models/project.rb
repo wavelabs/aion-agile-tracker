@@ -16,6 +16,8 @@
 
 class Project < ApplicationRecord
   belongs_to :company
+
   has_many :stories
   has_many :story_states
+  has_many :groups
 end

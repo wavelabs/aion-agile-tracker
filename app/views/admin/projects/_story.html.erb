@@ -6,6 +6,6 @@
   <td><%= story.story_type_display_name %></td>
   <td><%= story.story_state_display_name %></td>
   <td><%= link_to 'Show', _project_story_path(@project, story) %></td>
-  <td><%= link_to 'Edit', edit__project_story_path(story) %></td>
+  <td><%= link_to 'Edit', edit__project_story_path(@project, story) %></td>
   <td><%= link_to 'Destroy', _project_story_path(@project, story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 </tr>

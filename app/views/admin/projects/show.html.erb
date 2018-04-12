@@ -3,7 +3,7 @@
 <%= link_to 'New Story', new__project_story_path(@project) %>
 
 <%= render 'detail', project: @project %>
-<%= render 'stories', stories: @project.stories %> <br>
+<%= render 'groups', groups: @project.groups %> <br>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Story Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Done</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @story_tasks.each do |story_task| %>
+      <tr>
+        <td><%= story_task.description %></td>
+        <td><%= story_task.done %></td>
+        <td><%= link_to 'Show', story_task %></td>
+        <td><%= link_to 'Edit', edit_story_task_path(story_task) %></td>
+        <td><%= link_to 'Destroy', story_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Story Task', new_story_task_path %>

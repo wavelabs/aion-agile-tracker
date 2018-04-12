@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :story_tasks
+  resources :groups
   root 'welcome#show'
 
   devise_for :users, controllers: {

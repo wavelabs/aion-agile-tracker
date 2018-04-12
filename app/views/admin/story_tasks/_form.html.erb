@@ -1,0 +1,27 @@
+<%= form_with(model: story_task, local: true) do |form| %>
+  <% if story_task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(story_task.errors.count, "error") %> prohibited this story_task from being saved:</h2>
+
+      <ul>
+      <% story_task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :story_task_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :done %>
+    <%= form.check_box :done, id: :story_task_done %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
