@@ -1,11 +1,13 @@
-<tr>
-  <td><%= story.id %></td>
-  <td><%= story.title %> <hr> <%= markdown(story.description) %></td>
-  <td><%= story.points %></td>
-  <td><%= story.requester_abbr %></td>
-  <td><%= story.story_type_display_name %></td>
-  <td><%= story.story_state_display_name %></td>
-  <td><%= link_to 'Show', _project_story_path(@project, story) %></td>
-  <td><%= link_to 'Edit', edit__project_story_path(@project, story) %></td>
-  <td><%= link_to 'Destroy', _project_story_path(@project, story), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<tr class="<%= 'bg-success' if story.accepted? %>">
+  <td style="width: 2%;"><i class="fa <%= icon_for_story_type story.story_type %>"></i></td>
+  <td style="width: 2%;"><%= story.points if story.feature? %></td>
+  <td>
+    <%= link_to story.title, project_story_path(@project, story) %>
+    (
+      <% story.owners.each do |owner| %>
+        <%= link_to owner.abbr, [@project, :stories, q: { owners_id_eq: owner.id }] %>
+      <% end %>
+    )
+    </td>
+  <td style="width: 30%;"><%= story_action_button(story) %></td>
 </tr>

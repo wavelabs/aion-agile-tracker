@@ -1,0 +1,16 @@
+<fieldset>
+  <% iterations.each do |iteration| %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th colspan="5">
+          <small><%= "#{iteration.start_date.strftime('%b %e')} - #{iteration.end_date.strftime('%b %e')}" %> - <%= "#{iteration.points_done} of #{iteration.total_points}" %> - Velocity <%= iteration.velocity %></small>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render collection: iteration.stories, as: :story, partial: 'story' %>
+    </tbody>
+  </table>
+  <% end %>
+</fieldset>

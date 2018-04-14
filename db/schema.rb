@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180412002823) do
+ActiveRecord::Schema.define(version: 20180414150138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,24 @@ ActiveRecord::Schema.define(version: 20180412002823) do
     t.index ["project_id"], name: "index_groups_on_project_id"
   end
 
+  create_table "iterations", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "project_id"
+    t.integer "velocity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_iterations_on_project_id"
+  end
+
+  create_table "owners_stories", force: :cascade do |t|
+    t.integer "owner_id"
+    t.bigint "story_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["story_id"], name: "index_owners_stories_on_story_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -74,16 +92,15 @@ ActiveRecord::Schema.define(version: 20180412002823) do
     t.text "description"
     t.integer "points"
     t.integer "requester_id"
-    t.bigint "story_state_id"
-    t.bigint "story_type_id"
     t.bigint "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "group_id"
-    t.index ["group_id"], name: "index_stories_on_group_id"
+    t.string "story_type"
+    t.string "story_state"
+    t.string "group"
+    t.bigint "iteration_id"
+    t.index ["iteration_id"], name: "index_stories_on_iteration_id"
     t.index ["project_id"], name: "index_stories_on_project_id"
-    t.index ["story_state_id"], name: "index_stories_on_story_state_id"
-    t.index ["story_type_id"], name: "index_stories_on_story_type_id"
   end
 
   create_table "story_states", force: :cascade do |t|
@@ -173,10 +190,11 @@ ActiveRecord::Schema.define(version: 20180412002823) do
   add_foreign_key "companies_users", "roles"
   add_foreign_key "companies_users", "users"
   add_foreign_key "groups", "projects"
+  add_foreign_key "iterations", "projects"
+  add_foreign_key "owners_stories", "stories"
+  add_foreign_key "owners_stories", "users", column: "owner_id"
   add_foreign_key "projects", "companies"
   add_foreign_key "stories", "projects"
-  add_foreign_key "stories", "story_states"
-  add_foreign_key "stories", "story_types"
   add_foreign_key "stories", "users", column: "requester_id"
   add_foreign_key "story_states", "projects"
   add_foreign_key "tasks", "projects"

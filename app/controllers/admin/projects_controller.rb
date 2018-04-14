@@ -9,6 +9,8 @@ module Admin
 
     # GET /projects/1
     def show
+      @active_iterations = @project.active_iterations.limit(3)
+      @current_iteration = @project.current_iteration
     end
 
     # GET /projects/new
@@ -24,9 +26,7 @@ module Admin
     def create
       @project = NewProjectBuilder.new
                                   .assign_company(current_company)
-                                  .add_default_story_states
                                   .assign_attributes(project_params)
-                                  .build_scrum_board
                                   .build
 
       if @project.save

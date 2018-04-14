@@ -5,16 +5,6 @@ class NewProjectBuilder
     @model = resource || Project.new
   end
 
-  def add_default_story_states
-    @model.story_states = DefaultStoryStatesBuilder.build
-    self
-  end
-
-  def build_scrum_board
-    @model.groups = SCRUM_BOARD.map { |name| @model.groups.build(name: name) }
-    self
-  end
-
   def assign_company(company)
     model.company = company
     self
@@ -32,4 +22,8 @@ class NewProjectBuilder
   private
 
   attr_reader :model
+
+  def today
+    @today ||= Date.today
+  end
 end

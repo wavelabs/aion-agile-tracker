@@ -1,7 +1,7 @@
 <h1>Editing Story</h1>
 
 <%= render 'form', story: @story, requesters: @requesters,
-  story_states: @story_states, project: @project, story_types: @story_types, groups: @groups %>
+  story_states: @story_states, project: @project, story_types: @story_types %>
 
-<%= link_to 'Show', _project_story_path(@project, @story) %> |
+<%= link_to 'Show', project_story_path(@project, @story) %> |
 <%= link_to 'Back', @project %>

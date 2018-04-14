@@ -1,15 +1,12 @@
 module Admin
-  class StoriesController < ApplicationController
+  class StoriesController < BaseController
     before_action :set_project
     before_action :set_story,                 only: [:show, :edit, :update, :destroy]
-    before_action :set_pickable_groups,       only: [:new, :edit, :create, :update]
     before_action :set_pickable_requesters,   only: [:new, :edit, :create, :update]
-    before_action :set_pickable_story_states, only: [:new, :edit, :create, :update]
-    before_action :set_pickable_story_types,  only: [:new, :edit, :create, :update]
 
     # GET /stories
     def index
-      @stories = Story.all
+      @stories = Story.ransack(params[:q]).result
     end
 
     # GET /stories/1
@@ -27,7 +24,7 @@ module Admin
 
     # POST /stories
     def create
-      @story = @project.stories.build(story_params)
+      @story = create_story
 
       if @story.save
         redirect_to @project, notice: 'Story was successfully created.'
@@ -39,7 +36,7 @@ module Admin
     # PATCH/PUT /stories/1
     def update
       if @story.update(story_params)
-        redirect_to @story, notice: 'Story was successfully updated.'
+        redirect_to @project, notice: 'Story was successfully updated.'
       else
         render :edit
       end
@@ -59,8 +56,9 @@ module Admin
 
       # Only allow a trusted parameter "white list" through.
       def story_params
-        params.require(:story).permit(:title, :description, :points,
-          :requester_id, :story_state_id, :story_type_id, :label_list, :group_id)
+        params.require(:story)
+              .permit(:title, :description, :points, :requester_id, :story_type, :label_list)
+              .tap { |params| params[:points] = 0 unless params[:story_type] == 'feature' }
       end
 
       def set_project
@@ -71,16 +69,10 @@ module Admin
         @requesters = current_company.users
       end
 
-      def set_pickable_story_states
-        @story_states = @project.story_states.all
-      end
-
-      def set_pickable_story_types
-        @story_types = StoryType.all
-      end
-
-      def set_pickable_groups
-        @groups = @project.groups
+      def create_story
+        story           = @project.stories.build(story_params)
+        story.iteration = @project.find_next_iteration_for_story(story)
+        story
       end
   end
 

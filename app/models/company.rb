@@ -21,5 +21,4 @@ class Company < ApplicationRecord
   def count_users
     companies_users.users.count
   end
-
 end

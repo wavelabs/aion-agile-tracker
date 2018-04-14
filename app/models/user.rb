@@ -32,6 +32,9 @@ class User < ApplicationRecord
   has_many :companies, through: :companies_users
   has_many :tasks
 
+  has_many :stories, through: :owners_stories
+  has_many :owners_stories
+
   attr_accessor :company_name
 
   def role_for(company)

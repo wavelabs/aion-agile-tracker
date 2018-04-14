@@ -4,7 +4,6 @@ require 'database_cleaner'
 
 DatabaseCleaner.strategy = :transaction
 DatabaseCleaner.clean_with(:truncation)
-Rake::Task['db:seed'].invoke
 
 class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods

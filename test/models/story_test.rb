@@ -2,24 +2,23 @@
 #
 # Table name: stories
 #
-#  id             :integer          not null, primary key
-#  title          :string
-#  description    :text
-#  points         :integer
-#  requester_id   :integer
-#  story_state_id :integer
-#  story_type_id  :integer
-#  project_id     :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  group_id       :integer
+#  id           :integer          not null, primary key
+#  title        :string
+#  description  :text
+#  points       :integer
+#  requester_id :integer
+#  project_id   :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  story_type   :string
+#  story_state  :string
+#  group        :string
+#  iteration_id :integer
 #
 # Indexes
 #
-#  index_stories_on_group_id        (group_id)
-#  index_stories_on_project_id      (project_id)
-#  index_stories_on_story_state_id  (story_state_id)
-#  index_stories_on_story_type_id   (story_type_id)
+#  index_stories_on_iteration_id  (iteration_id)
+#  index_stories_on_project_id    (project_id)
 #
 
 require 'test_helper'

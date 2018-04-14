@@ -1,0 +1,32 @@
+<div class="col-md-3 left_col">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+            <a href="index.html" class="site_title">Aion Agile Manager</a>
+        </div>
+
+        <div class="profile"><!--img_2 -->
+            <div class="profile_pic">
+                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+                <span>Welcome,</span>
+                <h2><%= current_user.abbr %>. from <%= current_company.name %></h2>
+            </div>
+        </div>
+
+        <br>
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+          <% if controller_name == 'projects' && action_name == 'show' %>
+            <div class="menu_section">
+              <ul class="nav side-menu">
+                <li><%= link_to 'My Work', '#'%></li>
+                <li><%= link_to 'Current Iteration', project_stories_path(project_id: params[:id], q: { group_eq: 'current'}) %></li>
+                <li><%= link_to 'Backlog', project_stories_path(project_id: params[:id], q: { group_eq: 'backlog'}) %></li>
+                <li><%= link_to 'Icebox', project_stories_path(project_id: params[:id], q: { group_eq: 'icebox'})%></li>
+                <li><%= link_to 'Done', project_stories_path(project_id: params[:id], q: { story_state_eq: 'accepted'})%></li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+@import 'vendor/bootstrap.min';
+@import 'vendor/bootstrap-theme.min';
+@import 'admin/scaffolds';
+
+.btn-accept {
+  @extend .btn-success
+}
+
+.btn-reject {
+  @extend .btn-danger
+}
+
+.btn-finish {
+  @extend .btn-primary
+}
+
+.btn-deliver {
+  @extend .btn-warning
+}
+
+.btn-start {
+  @extend .btn-default
+}

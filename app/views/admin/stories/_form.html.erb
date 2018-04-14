@@ -1,4 +1,4 @@
-<%= form_with(model: story, url: _project_stories_path(project), local: true) do |form| %>
+<%= form_with(model: story, url: [project, story], local: true) do |form| %>
   <% if story.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(story.errors.count, "error") %> prohibited this story from being saved:</h2>
@@ -38,23 +38,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :state_id %>
-    <%= form.select :story_state_id, story_states.pluck(:display_name, :id), id: :story_state_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :story_type_id %>
-    <%= form.select :story_type_id, story_types.pluck(:display_name, :id), id: :story_type_id %>
+    <%= form.label :story_type %>
+    <%= form.select :story_type, Story::TYPES, id: :story_type %>
   </div>
 
   <div class="field">
     <%= form.label :label_list, 'Labels (separated by commas)' %><br/>
     <%= form.text_field :label_list %>
-  </div>
-
-  <div class="field">
-    <%= form.label :group_id %><br/>
-    <%= form.select :group_id, groups.pluck(:name, :id), id: :group_id %>
   </div>
 
   <div class="actions">
