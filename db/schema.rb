@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180414150138) do
+ActiveRecord::Schema.define(version: 20180414201015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,14 +43,6 @@ ActiveRecord::Schema.define(version: 20180414150138) do
     t.index ["company_id"], name: "index_companies_users_on_company_id"
     t.index ["role_id"], name: "index_companies_users_on_role_id"
     t.index ["user_id"], name: "index_companies_users_on_user_id"
-  end
-
-  create_table "groups", force: :cascade do |t|
-    t.string "name"
-    t.bigint "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_groups_on_project_id"
   end
 
   create_table "iterations", force: :cascade do |t|
@@ -103,15 +95,6 @@ ActiveRecord::Schema.define(version: 20180414150138) do
     t.index ["project_id"], name: "index_stories_on_project_id"
   end
 
-  create_table "story_states", force: :cascade do |t|
-    t.string "name"
-    t.string "display_name"
-    t.bigint "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_story_states_on_project_id"
-  end
-
   create_table "story_tasks", force: :cascade do |t|
     t.text "description"
     t.boolean "done", default: false
@@ -119,14 +102,6 @@ ActiveRecord::Schema.define(version: 20180414150138) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["story_id"], name: "index_story_tasks_on_story_id"
-  end
-
-  create_table "story_types", force: :cascade do |t|
-    t.string "name"
-    t.string "display_name"
-    t.string "icon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -189,14 +164,12 @@ ActiveRecord::Schema.define(version: 20180414150138) do
   add_foreign_key "companies_users", "companies"
   add_foreign_key "companies_users", "roles"
   add_foreign_key "companies_users", "users"
-  add_foreign_key "groups", "projects"
   add_foreign_key "iterations", "projects"
   add_foreign_key "owners_stories", "stories"
   add_foreign_key "owners_stories", "users", column: "owner_id"
   add_foreign_key "projects", "companies"
   add_foreign_key "stories", "projects"
   add_foreign_key "stories", "users", column: "requester_id"
-  add_foreign_key "story_states", "projects"
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "users"
 end

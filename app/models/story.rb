@@ -31,10 +31,6 @@ class Story < ApplicationRecord
   GROUPS = %w(current backlog icebox).freeze
   POINTS = [-1, 0, 1, 2, 3, 5, 8]
 
-  scope :current, ->() { where(group: 'current').where.not(iteration_id: nil) }
-  scope :backlog, ->() { where(group: 'backlog', iteration_id: nil) }
-  scope :icebox,  ->() { where(group: 'icebox', iteration_id: nil) }
-
   belongs_to :project
   belongs_to :requester
   delegate :abbr, to: :requester, prefix: true
