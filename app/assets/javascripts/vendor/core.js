@@ -1,9 +1,9 @@
 /**
  *
  */
-let hexToRgba = function(hex, opacity) {
-  let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  let rgb = result ? {
+var hexToRgba = function(hex, opacity) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  var rgb = result ? {
     r: parseInt(result[1], 16),
     g: parseInt(result[2], 16),
     b: parseInt(result[3], 16)
@@ -29,7 +29,7 @@ $(document).ready(function() {
 
   /** Function for remove card */
   $('[data-toggle="card-remove"]').on('click', function(e) {
-    let $card = $(this).closest(DIV_CARD);
+    var $card = $(this).closest(DIV_CARD);
 
     $card.remove();
 
@@ -39,7 +39,7 @@ $(document).ready(function() {
 
   /** Function for collapse card */
   $('[data-toggle="card-collapse"]').on('click', function(e) {
-    let $card = $(this).closest(DIV_CARD);
+    var $card = $(this).closest(DIV_CARD);
 
     $card.toggleClass('card-collapsed');
 
@@ -49,7 +49,7 @@ $(document).ready(function() {
 
   /** Function for fullscreen card */
   $('[data-toggle="card-fullscreen"]').on('click', function(e) {
-    let $card = $(this).closest(DIV_CARD);
+    var $card = $(this).closest(DIV_CARD);
 
     $card.toggleClass('card-fullscreen').removeClass('card-collapsed');
 
@@ -59,7 +59,7 @@ $(document).ready(function() {
 
   /**  */
   if ($('[data-sparkline]').length) {
-    let generateSparkline = function($elem, data, params) {
+    var generateSparkline = function($elem, data, params) {
       $elem.sparkline(data, {
         type: $elem.attr('data-sparkline-type'),
         height: '100%',
@@ -77,7 +77,7 @@ $(document).ready(function() {
 
     require(['sparkline'], function() {
       $('[data-sparkline]').each(function() {
-        let $chart = $(this);
+        var $chart = $(this);
 
         generateSparkline($chart, JSON.parse($chart.attr('data-sparkline')), {
           color: $chart.attr('data-sparkline-color')
@@ -90,7 +90,7 @@ $(document).ready(function() {
   if ($('.chart-circle').length) {
     require(['circle-progress'], function() {
       $('.chart-circle').each(function() {
-        let $this = $(this);
+        var $this = $(this);
 
         $this.circleProgress({
           fill: {
