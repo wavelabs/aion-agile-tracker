@@ -1,30 +1,30 @@
 module Admin
-  class CompaniesController < BaseController
-    before_action :set_company, only: [:show, :edit, :update, :destroy]
+  class AccountsController < BaseController
+    before_action :set_account, only: [:show, :edit, :update, :destroy]
 
-    # GET /companies
-    # GET /companies.json
+    # GET /accounts
+    # GET /accounts.json
     def index
-      @companies = current_user.companies
+      @accounts = current_user.accounts
     end
 
-    # GET /companies/1
-    # GET /companies/1.json
+    # GET /accounts/1
+    # GET /accounts/1.json
     def show
       @users = @company.users
     end
 
-    # GET /companies/new
+    # GET /accounts/new
     def new
       @company = Company.new
     end
 
-    # GET /companies/1/edit
+    # GET /accounts/1/edit
     def edit
     end
 
-    # POST /companies
-    # POST /companies.json
+    # POST /accounts
+    # POST /accounts.json
     def create
       @company = ::NewCompanyBuilder.new
                                     .assign_attributes(company_params)
@@ -42,8 +42,8 @@ module Admin
       end
     end
 
-    # PATCH/PUT /companies/1
-    # PATCH/PUT /companies/1.json
+    # PATCH/PUT /accounts/1
+    # PATCH/PUT /accounts/1.json
     def update
       respond_to do |format|
         if @company.update(company_params)
@@ -56,19 +56,19 @@ module Admin
       end
     end
 
-    # DELETE /companies/1
-    # DELETE /companies/1.json
+    # DELETE /accounts/1
+    # DELETE /accounts/1.json
     def destroy
       @company.destroy
       respond_to do |format|
-        format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
+        format.html { redirect_to accounts_url, notice: 'Company was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
 
     private
       # Use callbacks to share common setup or constraints between actions.
-      def set_company
+      def set_account
         @company = Company.find(params[:id])
       end
 

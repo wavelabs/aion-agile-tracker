@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<%= render 'detail', company: @company %>
-<%= render 'users', companies_users: @company.companies_users %>
-<%= render 'projects', projects: @company.projects %>
+<%= render 'detail', account: @account %>
+<%#= render 'users', companies_users: @account.companies_users %>
+<%= render 'projects', projects: @account.projects %>
 
 <br>
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Edit', edit_account_path(@account) %> |
 <%= link_to 'Back', companies_path %>

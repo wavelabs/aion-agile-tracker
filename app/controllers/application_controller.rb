@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_account
+    session[:account_id]    = params[:account_id] if params[:account_id]
     @current_account      ||= find_current_account
     session[:account_id]    = @current_account&.id
     @current_account
@@ -16,7 +17,7 @@ class ApplicationController < ActionController::Base
   private
 
   def find_current_account
-    Account.find(account_id)
+    current_user.accounts.find(account_id)
   rescue ActiveRecord::RecordNotFound => e
     current_user.accounts.first
   end
