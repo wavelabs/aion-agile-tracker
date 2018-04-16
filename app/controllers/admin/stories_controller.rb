@@ -6,7 +6,10 @@ module Admin
 
     # GET /stories
     def index
-      @stories = Story.ransack(params[:q]).result
+      @stories       = Story.ransack(params[:q]).result.order_by_weight
+      @total_points  = @stories.features.sum(:points)
+      @points_done   = @stories.features.accepted.sum(:points)
+      @total_stories = @stories.count
     end
 
     # GET /stories/1

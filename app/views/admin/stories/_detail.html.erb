@@ -1,21 +1,37 @@
-<p id="notice"><%= notice %></p>
-
-<fieldset>
-  <legend>Datail</legend>
-  <dl>
-    <dt>Title:</dt>
-    <dd><%= story.title %></dd>
-    <dt>Description:</dt>
-    <dd><%= markdown(story.description) %></dd>
-    <dt>Points:</dt>
-    <dd><%= story.points %></dd>
-    <dt>Requester:</dt>
-    <dd><%= story.requester_abbr %></dd>
-    <dt>Story Type</dt>
-    <dd><%= story.story_type %></dd>
-    <dt>State</dt>
-    <dd><%= story.story_state %></dd>
-    <dt>Labels</dt>
-    <dd><%= story.label_list %></dd>
-  </dl>
-</fieldset>
+<div class="card">
+  <div class="card-header">
+      <div class="card-title"><%= story.title %></div>
+      <div class="card-options">
+        <%= link_to 'Edit', [:edit, story.project, story], class: 'btn btn-secondary btn-sm' %>
+      </div>
+  </div>
+  <table class="table card-table table-vcenter text-nowrap">
+    <tr>
+      <th>Points:</th>
+      <td><%= story.points %></td>
+    </tr>
+    <tr>
+      <th>Story Type:</th>
+      <td><i class="fa <%= icon_for_story_type(story.story_type) %>"></i> <%= story.story_type.titleize %></td>
+    </tr>
+    <tr>
+      <th>Requester:</th>
+      <td><%= link_to story.requester_abbr, [story.project, :stories, q: { requester_id_eql: story.requester_id }] %></td>
+    </tr>
+    <tr>
+      <th>Owners:</th>
+      <td><%= owner_list_links(story) %></td>
+    </tr>
+    <tr>
+      <th>State:</th>
+      <td><%= story_action_button(story) %></td>
+    </tr>
+    <tr>
+      <th>Labels</th>
+      <td><%= label_list_to_html(story.label_list) %></td>
+    </tr>
+  </table>
+  <div class="card-footer">
+    <%= markdown(story.description) %>
+  </div>
+</div>

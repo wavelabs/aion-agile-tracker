@@ -1,5 +1,3 @@
-@import 'vendor/bootstrap.min';
-@import 'vendor/bootstrap-theme.min';
 @import 'admin/scaffolds';
 
 .btn-accept {
@@ -19,5 +17,16 @@
 }
 
 .btn-start {
-  @extend .btn-default
+  @extend .btn-secondary
 }
+
+.Iteration {
+  .Story-title {
+    color: #495057;
+  }
+
+}
+.Story--accepted {
+  background-color: #C7D9B8;
+}
+

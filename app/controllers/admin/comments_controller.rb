@@ -10,17 +10,17 @@ module Admin
                                   .assign_attributes(comment_params)
                                   .build
       @comment.save!
-      redirect_to ['', @project, @story], notice: 'Comment created succesfully'
+      redirect_to [@project, @story], notice: 'Comment created succesfully'
     rescue ActiveRecord::RecordInvalid => e
-      redirect_to ['', @project, @story], notice: "Coudn\'t create the comment: #{@comment.errors.full_message}"
+      redirect_to [@project, @story], notice: "Coudn\'t create the comment: #{@comment.errors.full_message}"
     end
 
     def update
       @comment = @story.comments.find(params[:id])
       @comment.update!(comment_params)
-      redirect_to ['', @project, @story], notice: 'Comment updated succesfully'
+      redirect_to [@project, @story], notice: 'Comment updated succesfully'
     rescue ActiveRecord::RecordInvalid => e
-      redirect_to ['', @project, @story], notice: "Coudn\'t update the comment: #{@comment.errors.full_message}"
+      redirect_to [@project, @story], notice: "Coudn\'t update the comment: #{@comment.errors.full_message}"
     end
 
     private

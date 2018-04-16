@@ -1,4 +1,4 @@
-<%= form_with(model: story, url: [project, story], local: true) do |form| %>
+<%= form_with(model: story, url: [project, story], local: true, class: 'card') do |form| %>
   <% if story.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(story.errors.count, "error") %> prohibited this story from being saved:</h2>
@@ -11,43 +11,59 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :story_title %>
-    <p class="hint">
-      As a <strong>WHO?</strong>, I want <strong>WHAT?</strong> so that <strong>WHY?</strong>
-    </p>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= form.label :title, class: 'form-label' %>
+          <%= form.text_field :title, id: :story_title, class: 'form-control' %>
+          <p class="hint">
+            As a <strong>WHO?</strong>, I want <strong>WHAT?</strong> so that <strong>WHY?</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= form.label :description, class: 'form-label' %>
+          <%= form.text_area :description, id: :story_description, class: 'form-control' %>
+          <p class="hint">
+            Markdown sopported
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= form.label :points, class: 'form-label' %>
+          <%= form.select :points, Story::POINTS, {}, id: :story_points, class: 'form-control custom-select' %>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= form.label :requester_id, class: 'form-label' %>
+          <%= form.select :requester_id, requesters.pluck(:email, :id), {}, id: :requester_id, class: 'form-control custom-select' %>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= form.label :story_type, class: 'form-label' %>
+          <%= form.select :story_type, Story::TYPES, {}, id: :story_type, class: 'form-control custom-select' %>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= form.label :label_list, 'Labels (separated by commas)' %><b, class: 'form-label'r/>
+          <%= form.text_field :label_list, class: 'form-control', id: :story_label_list %>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :story_description %>
-    <p class="hint">
-      Markdown sopported
-    </p>
-  </div>
-
-  <div class="field">
-    <%= form.label :points %>
-    <%= form.select :points, Story::POINTS, id: :story_points %>
-  </div>
-
-  <div class="field">
-    <%= form.label :requester_id %>
-    <%= form.select :requester_id, requesters.pluck(:email, :id), id: :requester_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :story_type %>
-    <%= form.select :story_type, Story::TYPES, id: :story_type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :label_list, 'Labels (separated by commas)' %><br/>
-    <%= form.text_field :label_list %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="card-footer text-right">
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

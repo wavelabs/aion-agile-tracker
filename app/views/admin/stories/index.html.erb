@@ -1,35 +1,25 @@
+<div class="page-header">
+  <div class="page-title">
+    Stories
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-12">
-    <div class="x_panel">
-      <div class="x_title">
-        <h2>Stories</h2>
-        <ul class="nav navbar-right panel_toolbox">
-          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-          </li>
-          <li><a class="close-link"><i class="fa fa-close"></i></a>
-          </li>
-          <li><%= link_to 'New Story', [:new, @project, :story] %></li>
-        </ul>
-        <div class="clearfix"></div>
-      </div>
-      <div class="x_content">
+    <div class="card">
+      <div class="table-responsive">
         <table class="table">
+          <thead>
+            <tr>
+              <th colspan="5">
+                <small>
+                  <%= "#{@total_stories} stories, #{@points_done} of #{@total_points} pts" %></small>
+              </th>
+            </tr>
+          </thead>
           <tbody>
             <% @stories.each do |story| %>
-              <tr>
-                <td><%= story.points %></td>
-                <td><i class="fa fa-<%= story.story_type %>"></i></td>
-                <td>
-                  <%= link_to story.title, project_story_path(@project, story) %>
-                    (
-                      <% story.owners.each do |owner| %>
-                        <%= link_to owner.abbr, [@project, :stories, q: { owners_id_eq: owner.id }] %>
-                      <% end %>
-                    )
-                </td>
-                <td><%= story.requester_id %></td>
-                <td><%= state_button(story) %></td>
-              </tr>
+              <%= render 'admin/projects/story', story: story %>
             <% end %>
           </tbody>
         </table>

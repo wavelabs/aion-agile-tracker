@@ -46,6 +46,17 @@ class Story < ApplicationRecord
     group(:story_state).count
   end
 
+  scope :features, ->() { where(story_type: 'feature') }
+
+  scope :order_by_weight, ->() do
+    weight_order = Arel.sql(%Q{
+        CASE WHEN #{table_name}.story_type = 'release' AND #{table_name}.story_type is not null THEN 99
+             WHEN #{table_name}.story_state = 'accepted' AND #{table_name}.story_type is not null is not null THEN 0
+        ELSE 1 END
+    })
+    order(weight_order)
+  end
+
   aasm column: 'story_state' do
     state :unstarted, :initial => true
     state :started, :finished, :delivered, :rejected, :accepted

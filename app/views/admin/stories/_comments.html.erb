@@ -1,10 +1,21 @@
-<fieldset>
-  <legend>Comments</legend>
-  <dl>
+<div class="card">
+  <div class="card-header">
+      <div class="card-title">Comments</div>
+  </div>
+  <table class="table card-table table-vcenter text-nowrap">
     <% comments.each do |comment| %>
-      <dd><%= comment.user_abbr %> says:</dd>
-      <dd><%= markdown(comment.comment) %></dd>
-      <hr>
+      <tr>
+        <th style="width: 10%"><%= comment.user_abbr %> says:</th>
+        <td><%= markdown(comment.comment) %></td>
+        <th style="width: 2%">
+          <div class="dropdown">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">Options</button>
+          </div>
+        </th>
+      </tr>
     <% end %>
-  </dl>
-</fieldset>
+  </table>
+  <div class="card-footer text-right">
+    <%= render 'admin/comments/form', comment: @story.comments.build %>
+  </div>
+</div>

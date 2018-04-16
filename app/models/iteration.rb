@@ -23,11 +23,11 @@ class Iteration < ApplicationRecord
   scope :current, ->() { active.where('start_date <= ?', Date.today) }
 
   def total_points
-    stories.sum(:points)
+    stories.features.sum(:points)
   end
 
   def points_done
-    stories.accepted.sum(:points)
+    stories.features.accepted.sum(:points)
   end
 
   def calculate_iteration_velocity

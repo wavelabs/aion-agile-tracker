@@ -1,23 +1,10 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="x_panel">
-      <div class="x_title">
-        <h2>Projects</h2>
-        <ul class="nav navbar-right panel_toolbox">
-          <li><%= link_to 'New Story', new_project_story_path(@project) %></li>
-        </ul>
-        <div class="clearfix"></div>
-      </div>
-      <div class="x_content">
-        <div class="col-md-12">
-          <fieldset>
-            <legend>
-              <%= link_to 'Current/Backlog', [@project, :stories, q: { iteration_id_eq: @current_iteration }] %>
-            </legend>
-            <%= render 'iterations', iterations: @active_iterations %> <br>
-          </fieldset>
-        </div>
-      </div>
-    </div>
+<div class="page-header">
+  <h1 class="page-title">
+    Project: <%= @project.name %>
+  </h1>
+  <div class="page-options d-flex">
+    <%= link_to 'New Story', new_project_story_path(@project), class: 'btn btn-secondary' %>
   </div>
 </div>
+
+<%= render 'iterations', iterations: @active_iterations %> <br>

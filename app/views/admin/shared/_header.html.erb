@@ -1,94 +1,77 @@
-<div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+<div class="header py-4">
+  <div class="container">
+    <div class="d-flex">
+      <%= link_to 'Aion Agile Manager', dashboard_path, class: 'header-brand' %>
+      <div class="d-flex order-lg-2 ml-auto">
+        <!--div class="nav-item d-none d-md-flex">
+          <a href="https://github.com/tabler/tabler" class="btn btn-sm btn-outline-primary" target="_blank">Source code</a>
+        </div-->
+        <!-- div class="dropdown d-none d-md-flex">
+          <a class="nav-link icon" data-toggle="dropdown">
+            <i class="fe fe-bell"></i>
+            <span class="nav-unread"></span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+            <a href="#" class="dropdown-item d-flex">
+              <span class="avatar mr-3 align-self-center" style="background-image: url(demo/faces/male/41.jpg)"></span>
+              <div>
+                <strong>Nathan</strong> pushed new commit: Fix page load performance issue.
+                <div class="small text-muted">10 minutes ago</div>
               </div>
-
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                  </ul>
-                </li>
-
-                <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image"></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
+            </a>
+            <a href="#" class="dropdown-item d-flex">
+              <span class="avatar mr-3 align-self-center" style="background-image: url(demo/faces/female/1.jpg)"></span>
+              <div>
+                <strong>Alice</strong> started new task: Tabler UI design.
+                <div class="small text-muted">1 hour ago</div>
+              </div>
+            </a>
+            <a href="#" class="dropdown-item d-flex">
+              <span class="avatar mr-3 align-self-center" style="background-image: url(demo/faces/female/18.jpg)"></span>
+              <div>
+                <strong>Rose</strong> deployed new version of NodeJS REST Api V3
+                <div class="small text-muted">2 hours ago</div>
+              </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item text-center text-muted-dark">Mark all as read</a>
+          </div>
+        </div-->
+        <div class="dropdown">
+          <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+            <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
+            <span class="ml-2 d-none d-lg-block">
+              <span class="text-default"><%= current_user.abbr %></span>
+              <small class="text-muted d-block mt-1">Administrator</small>
+            </span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+            <a class="dropdown-item" href="#">
+              <i class="dropdown-icon fe fe-user"></i> Profile
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="dropdown-icon fe fe-settings"></i> Settings
+            </a>
+            <a class="dropdown-item" href="#">
+              <span class="float-right"><span class="badge badge-primary">6</span></span>
+              <i class="dropdown-icon fe fe-mail"></i> Inbox
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="dropdown-icon fe fe-send"></i> Message
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <i class="dropdown-icon fe fe-help-circle"></i> Need help?
+            </a>
+            <%= link_to destroy_user_session_path, class: 'dropdown-item', method: :delete do %>
+              <i class="dropdown-icon fa fa-exit"></i> Sign out
+            <% end %>
           </div>
         </div>
+      </div>
+      <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+        <span class="header-toggler-icon"></span>
+      </a>
+    </div>
+  </div>
+</div>

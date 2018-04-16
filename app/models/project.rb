@@ -17,12 +17,15 @@
 class Project < ApplicationRecord
   belongs_to :company
 
-  has_many :stories
-  has_many :story_states
   has_many :iterations
+  has_many :stories, through: :iterations
+  has_many :story_states
 
   def progress
-    stories.count_and_group_by_story_states
+    total_features = stories.features.count.to_f
+    return 0 if total_features == 0.0
+    accepted_stories = stories.features.accepted.count.to_f
+    (accepted_stories / total_features * 100.0).to_i
   end
 
   def active_iterations

@@ -9,7 +9,6 @@
     <%= csrf_meta_tags %>
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="css/animate.min.css" rel="stylesheet">
     <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
     <!--[if lt IE 9]>
     <script src="../assets/js/ie8-responsive-file-warning.js"></script>
@@ -22,17 +21,19 @@
     <![endif]-->
   </head>
 
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <%= render 'admin/shared/sidemenu' %>
+  <body>
+    <div class="page">
+      <div class="page-main">
         <%= render 'admin/shared/header' %>
 
-        <div class="right_col">
-          <%= render 'admin/shared/alerts' %>
-          <%= yield %>
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <%= render 'admin/shared/alerts' %>
+            <%= yield %>
+          </div>
         </div>
       </div>
+      <%= render 'admin/shared/footer' %>
     </div>
     <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
   </body>

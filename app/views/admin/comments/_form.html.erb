@@ -1,11 +1,14 @@
 <%= form_with model: comment, url: [comment.commentable.project, comment.commentable, comment], local: true do |form| %>
-  <div class="field">
-    <%= form.label :comment %>
-    <%= form.text_area :comment, id: :story_comment %>
-    <p class="hint">
-      Markdown sopported
-    </p>
+  <div class="row">
+    <div class="col-md-12">
+      <%= form.text_area :comment, id: :story_comment, class: 'form-control' %>
+      <p class="hint">
+        Markdown sopported
+      </p>
+    </div>
   </div>
 
-  <%= form.submit %>
+  <div class="d-flex">
+    <%= form.submit class: 'btn btn-primary ml-auto' %>
+  </div>
 <% end %>
