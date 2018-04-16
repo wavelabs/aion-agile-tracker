@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: companies
+# Table name: accounts
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -8,17 +8,17 @@
 #  updated_at :datetime         not null
 #
 
-class Company < ApplicationRecord
-  has_many :companies_users
-  has_many :users, through: :companies_users
+class Account < ApplicationRecord
+  has_many :accounts_users
+  has_many :users, through: :accounts_users
   has_many :projects
 
   def admin
-    companies_users.admin.user
+    accounts_users.admin.user
   end
   delegate :email, to: :admin, prefix: true
 
   def count_users
-    companies_users.users.count
+    accounts_users.users.count
   end
 end

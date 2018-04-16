@@ -1,21 +1,21 @@
 # == Schema Information
 #
-# Table name: companies_users
+# Table name: accounts_users
 #
 #  id         :integer          not null, primary key
-#  company_id :integer
+#  account_id :integer
 #  user_id    :integer
 #  role_id    :integer
 #
 # Indexes
 #
-#  index_companies_users_on_company_id  (company_id)
-#  index_companies_users_on_role_id     (role_id)
-#  index_companies_users_on_user_id     (user_id)
+#  index_accounts_users_on_account_id  (account_id)
+#  index_accounts_users_on_role_id     (role_id)
+#  index_accounts_users_on_user_id     (user_id)
 #
 
-class CompaniesUser < ApplicationRecord
-  belongs_to :company
+class AccountsUser < ApplicationRecord
+  belongs_to :account
   belongs_to :user
   delegate :email, to: :user, prefix: true
   belongs_to :role

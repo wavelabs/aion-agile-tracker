@@ -5,8 +5,8 @@ class NewProjectBuilder
     @model = resource || Project.new
   end
 
-  def assign_company(company)
-    model.company = company
+  def assign_account(account)
+    model.account = account
     self
   end
 

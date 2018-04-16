@@ -7,11 +7,11 @@
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  company_id  :integer
+#  account_id  :integer
 #
 # Indexes
 #
-#  index_projects_on_company_id  (company_id)
+#  index_projects_on_account_id  (account_id)
 #
 
 FactoryGirl.define do

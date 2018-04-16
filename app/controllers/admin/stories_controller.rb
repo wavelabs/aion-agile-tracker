@@ -61,15 +61,18 @@ module Admin
       def story_params
         params.require(:story)
               .permit(:title, :description, :points, :requester_id, :story_type, :label_list)
-              .tap { |params| params[:points] = 0 unless params[:story_type] == 'feature' }
+              .tap do |params|
+                params[:points] = 0 unless params[:story_type] == 'feature'
+                params[:project_id] = @project.id
+              end
       end
 
       def set_project
-        @project = current_company.projects.find params[:project_id]
+        @project = current_account.projects.find params[:project_id]
       end
 
       def set_pickable_requesters
-        @requesters = current_company.users
+        @requesters = current_account.users
       end
 
       def create_story

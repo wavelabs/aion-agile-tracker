@@ -4,7 +4,7 @@ module Admin
 
     # GET /projects
     def index
-      @projects = current_company.projects
+      @projects = current_account.projects
     end
 
     # GET /projects/1
@@ -25,7 +25,7 @@ module Admin
     # POST /projects
     def create
       @project = NewProjectBuilder.new
-                                  .assign_company(current_company)
+                                  .assign_account(current_account)
                                   .assign_attributes(project_params)
                                   .build
 

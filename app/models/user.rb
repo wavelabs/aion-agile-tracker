@@ -15,6 +15,7 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  username               :string
 #
 # Indexes
 #
@@ -28,9 +29,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :companies_users, dependent: :destroy
-  has_many :companies, through: :companies_users
+  has_many :accounts_users, dependent: :destroy
+  has_many :accounts, through: :accounts_users
   has_many :tasks
+  has_many :projects, through: :accounts
 
   has_many :stories, through: :owners_stories
   has_many :owners_stories
@@ -38,7 +40,7 @@ class User < ApplicationRecord
   attr_accessor :company_name
 
   def role_for(company)
-    companies_users.find_by(company: company).role
+    accounts_users.find_by(company: company).role
   end
 
   def abbr

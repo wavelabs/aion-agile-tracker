@@ -26,7 +26,7 @@ module Admin
     private
 
     def set_project
-      @project = current_company.projects.find(params[:project_id])
+      @project = current_account.projects.find(params[:project_id])
     end
 
     def set_story

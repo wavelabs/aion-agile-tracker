@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       end
     end
     resources :tasks
-    resources :companies
-    resources :companies_users, only: [:destroy]
+    resources :accounts
+    resources :accounts_users, only: [:destroy]
   end
 end

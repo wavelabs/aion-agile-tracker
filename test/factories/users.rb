@@ -15,6 +15,7 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  username               :string
 #
 # Indexes
 #
@@ -33,8 +34,8 @@ FactoryGirl.define do
 
     trait :admin do
       after(:create) do |user, evaluator|
-        company = create :company
-        company.companies_users.create(user: user, role: Role.admin)
+        account = create :account
+        account.accounts_users.create(user: user, role: Role.admin)
       end
     end
   end

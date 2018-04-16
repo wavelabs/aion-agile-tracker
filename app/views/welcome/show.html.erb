@@ -2,7 +2,7 @@
 <p>Find me in app/views/welcome/show.html.erb</p>
 
 <% if logged_in? %>
-  <%= current_company.name %>
+  <%= current_account.name %>
   <%= link_to :sign_out, destroy_user_session_path, method: :delete %> |
   <%= link_to :dashboard, dashboard_path %>
 <% else %>

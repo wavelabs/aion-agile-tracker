@@ -3,8 +3,9 @@ class NewUserBuilder
     @model = resource
   end
 
-  def add_company_relationship
-    CompaniesUser.find_or_create_by(company: company, user: model, role: role)
+  def create_personal_account
+    account = Account.find_or_create_by(name: model.username)
+    relation = account.accounts_users.create(user: model, role: Role.admin)
     self
   end
 
@@ -15,13 +16,4 @@ class NewUserBuilder
   private
 
   attr_reader :model
-
-  def company
-    Company.find_or_create_by(name: model.company_name)
-  end
-
-  def role
-    return Role.admin if company.users.empty?
-    Role.user
-  end
 end
