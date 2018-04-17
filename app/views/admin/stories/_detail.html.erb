@@ -3,6 +3,9 @@
       <div class="card-title"><%= story.title %></div>
       <div class="card-options">
         <%= link_to 'Edit', [:edit, story.project, story], class: 'btn btn-secondary btn-sm' %>
+        <%= link_to [story.project, story], class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash-o"></i>
+        <% end %>
       </div>
   </div>
   <table class="table card-table table-vcenter text-nowrap">
@@ -28,7 +31,7 @@
     </tr>
     <tr>
       <th>Labels</th>
-      <td><%= label_list_to_html(story.label_list) %></td>
+      <td><%= label_list_links(story) %></td>
     </tr>
   </table>
   <div class="card-footer">

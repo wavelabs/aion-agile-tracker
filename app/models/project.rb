@@ -19,7 +19,10 @@ class Project < ApplicationRecord
 
   has_many :iterations
   has_many :stories, through: :iterations
+  has_many :labels, through: :stories
   has_many :story_states
+
+  validates :name, presence: true
 
   def progress
     total_features = stories.features.count.to_f

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'dashboard#show'
     get ':id/profile', to: 'profiles#show', as: :user_profile
     get 'profile', to: 'profiles#show', as: :profile
-    resources :projects do
+    resources :projects, except: [:index] do
+      resources :tags, only: [:index]
       resources :stories do
         resources :comments, only: [:create, :update]
 

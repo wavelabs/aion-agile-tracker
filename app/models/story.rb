@@ -24,7 +24,7 @@
 class Story < ApplicationRecord
   include AASM
 
-  acts_as_taggable_on :labels
+  acts_as_taggable_on :labels, :epics
   acts_as_commentable
 
   TYPES  = %w(feature chore bug release).freeze
@@ -39,12 +39,10 @@ class Story < ApplicationRecord
   has_many :story_tasks
   alias_method :tasks, :story_tasks
 
+  validates :title, presence: true
+
   has_many :owners_stories, dependent: :destroy
   has_many :owners, -> { distinct }, through: :owners_stories
-
-  scope :count_and_group_by_story_states, ->() do
-    group(:story_state).count
-  end
 
   scope :features, ->() { where(story_type: 'feature') }
 

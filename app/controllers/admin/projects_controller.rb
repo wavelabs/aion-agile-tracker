@@ -2,14 +2,9 @@ module Admin
   class ProjectsController < BaseController
     before_action :set_project, only: [:show, :edit, :update, :destroy]
 
-    # GET /projects
-    def index
-      @projects = current_account.projects
-    end
-
     # GET /projects/1
     def show
-      @active_iterations = @project.active_iterations.limit(3)
+      @active_iterations = @project.active_iterations.includes(stories: [:requester, :owners, :labels]).limit(3)
       @current_iteration = @project.current_iteration
     end
 

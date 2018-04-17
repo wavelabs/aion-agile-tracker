@@ -1,6 +1,6 @@
 <tr class="Story <%= 'Story--accepted' if story.accepted? %>">
   <td style="width: 1%;"><i class="fa <%= icon_for_story_type story.story_type %>"></i></td>
-  <td style="width: 1%;"><%= story.points if story.feature? %></td>
+  <td style="width: 1%;"><%= story.points if story.estimated? && story.points? %></td>
   <td>
     <%= link_to story.title, project_story_path(@project, story), class: 'Story-title' %>
     (

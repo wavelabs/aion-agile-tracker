@@ -105,15 +105,23 @@ $(document).ready(function() {
     });
   }
 
-  if($('#story_label_list').length) {
-    $('#story_label_list').selectize({
+  var $storyLabelList = $('#story_label_list')
+  if($storyLabelList.length) {
+    $storyLabelList.selectize({
                                 delimiter: ',',
+                                valueField: 'name',
+                                labelField: 'name',
+                                searchField: 'name',
                                 persist: false,
                                 create: function (input) {
-                                    return {
-                                        value: input,
-                                        text: input
-                                    }
+                                    return {name: input}
+                                },
+                                load: function (query, callback) {
+                                  var tagsUrl = new URL($storyLabelList.attr('data-url'));
+                                  tagsUrl.searchParams.set('name', query);
+                                  $.getJSON(tagsUrl.href, function (data) {
+                                    return callback(data);
+                                  });
                                 }
                           });
   }
