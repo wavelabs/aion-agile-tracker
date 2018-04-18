@@ -1,10 +1,10 @@
-class NewCompanyBuilder
+class NewAccountBuilder
   def initialize(resource = nil)
-    @model = resource || Company.new
+    @model = resource || Account.new
   end
 
-  def add_user(user)
-    model.companies_users.build(user: user, role: role)
+  def set_owner(user)
+    model.accounts_users.build(user: user, role: Role.admin)
     self
   end
 
@@ -15,6 +15,10 @@ class NewCompanyBuilder
 
   def build
     model
+  end
+
+  def save
+    model.save
   end
 
   private

@@ -1,6 +1,4 @@
 class NewProjectBuilder
-  SCRUM_BOARD = ['icebox', 'current', 'backlog', 'done'].freeze
-
   def initialize(resource = nil)
     @model = resource || Project.new
   end

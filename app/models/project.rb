@@ -22,6 +22,8 @@ class Project < ApplicationRecord
   has_many :labels, through: :stories
   has_many :story_states
 
+  has_many :collaborators, through: :stories, class_name: 'User', source: :owners
+
   validates :name, presence: true
 
   def progress
@@ -41,6 +43,14 @@ class Project < ApplicationRecord
 
   def avg_velocity
     (iterations.last(3).sum(&:velocity) / 3).to_i
+  end
+
+  def count_collaborators
+    collaborators.count
+  end
+
+  def count_stories
+    stories.count
   end
 
   def find_next_iteration_for_story(story)

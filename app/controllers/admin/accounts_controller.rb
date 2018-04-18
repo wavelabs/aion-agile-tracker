@@ -5,18 +5,19 @@ module Admin
     # GET /accounts
     # GET /accounts.json
     def index
-      @accounts = current_user.accounts
+      @accounts_owned_by_me = current_user.accounts.owned_by(current_user)
+      @accounts             = current_user.accounts.belongs(current_user)
     end
 
     # GET /accounts/1
     # GET /accounts/1.json
     def show
-      @users = @company.users
+      @users = @account.users
     end
 
     # GET /accounts/new
     def new
-      @company = Company.new
+      @account = current_user.accounts.build
     end
 
     # GET /accounts/1/edit
@@ -26,18 +27,18 @@ module Admin
     # POST /accounts
     # POST /accounts.json
     def create
-      @company = ::NewCompanyBuilder.new
-                                    .assign_attributes(company_params)
-                                    .add_user(current_user)
+      @account = ::NewAccountBuilder.new
+                                    .assign_attributes(account_params)
+                                    .set_owner(current_user)
                                     .build
 
       respond_to do |format|
-        if @company.save
-          format.html { redirect_to @company, notice: 'Company was successfully created.' }
-          format.json { render :show, status: :created, location: @company }
+        if @account.save
+          format.html { redirect_to accounts_path, notice: 'Account was successfully created.' }
+          format.json { render :show, status: :created, location: @account }
         else
           format.html { render :new }
-          format.json { render json: @company.errors, status: :unprocessable_entity }
+          format.json { render json: @account.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -46,12 +47,12 @@ module Admin
     # PATCH/PUT /accounts/1.json
     def update
       respond_to do |format|
-        if @company.update(company_params)
-          format.html { redirect_to @company, notice: 'Company was successfully updated.' }
-          format.json { render :show, status: :ok, location: @company }
+        if @account.update(account_params)
+          format.html { redirect_to accounts_path, notice: 'Account was successfully updated.' }
+          format.json { render :show, status: :ok, location: @account }
         else
           format.html { render :edit }
-          format.json { render json: @company.errors, status: :unprocessable_entity }
+          format.json { render json: @account.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -59,9 +60,9 @@ module Admin
     # DELETE /accounts/1
     # DELETE /accounts/1.json
     def destroy
-      @company.destroy
+      @account.destroy
       respond_to do |format|
-        format.html { redirect_to accounts_url, notice: 'Company was successfully destroyed.' }
+        format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
@@ -69,12 +70,12 @@ module Admin
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_account
-        @company = Company.find(params[:id])
+        @account = Account.find(params[:id])
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.
-      def company_params
-        params.require(:company).permit(:name)
+      def account_params
+        params.require(:account).permit(:name)
       end
   end
 end

@@ -21,7 +21,8 @@ class AccountsUser < ApplicationRecord
   belongs_to :role
   delegate :name, to: :role, prefix: true
 
-  scope :users, ->() { where(role: Role.user) }
+  scope :users, ->()  { where(role: Role.user) }
+  scope :admins, ->() { where(role: Role.admin) }
 
   class << self
     def admin

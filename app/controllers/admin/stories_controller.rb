@@ -68,11 +68,11 @@ module Admin
       end
 
       def set_project
-        @project = current_account.projects.find params[:project_id]
+        @project = current_user.projects.find params[:project_id]
       end
 
       def set_pickable_requesters
-        @requesters = current_account.users
+        @requesters = @project.account.users
       end
 
       def create_story

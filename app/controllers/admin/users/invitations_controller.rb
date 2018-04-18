@@ -8,9 +8,9 @@ module Admin
 
       def create
         super do |user|
-          collaborator_account = Account.create(name: user.email)
-          AccountsUser.create(account: collaborator_account, user: user, role: Role.admin)
-          AccountsUser.create(account: account, user: user, role: Role.user)
+          collaborator_account = Account.find_or_create_by(name: user.email)
+          AccountsUser.find_or_create_by(account: collaborator_account, user: user, role: Role.admin)
+          AccountsUser.find_or_create_by(account: account, user: user, role: Role.user)
         end
       end
 

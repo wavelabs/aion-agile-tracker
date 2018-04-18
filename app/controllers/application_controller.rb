@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_account
-    session[:account_id]    = params[:account_id] if params[:account_id]
     @current_account      ||= find_current_account
     session[:account_id]    = @current_account&.id
     @current_account

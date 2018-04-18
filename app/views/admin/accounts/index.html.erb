@@ -5,4 +5,10 @@
   </div>
 </div>
 
+<%= render collection: @accounts_owned_by_me, as: :account, partial: 'accounts' %>
+
+<div class="page-header">
+  <h1 class="page-title"> Accounts you Belong </h1>
+</div>
+
 <%= render collection: @accounts, as: :account, partial: 'accounts' %>

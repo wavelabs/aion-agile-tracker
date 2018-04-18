@@ -13,6 +13,9 @@ class Account < ApplicationRecord
   has_many :users, through: :accounts_users
   has_many :projects
 
+  scope :owned_by, ->(user) { merge(AccountsUser.admins) }
+  scope :belongs,  ->(user) { merge(AccountsUser.users) }
+
   def admin
     accounts_users.admin.user
   end

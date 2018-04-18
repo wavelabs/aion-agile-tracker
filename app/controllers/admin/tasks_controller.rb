@@ -59,7 +59,7 @@ module Admin
       end
 
       def set_projects
-        @projects = current_account.projects
+        @projects = current_user.projects
       end
   end
 

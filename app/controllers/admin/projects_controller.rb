@@ -1,6 +1,7 @@
 module Admin
   class ProjectsController < BaseController
     before_action :set_project, only: [:show, :edit, :update, :destroy]
+    before_action :set_accounts, only: [:new, :create, :edit, :update]
 
     # GET /projects/1
     def show
@@ -20,7 +21,6 @@ module Admin
     # POST /projects
     def create
       @project = NewProjectBuilder.new
-                                  .assign_account(current_account)
                                   .assign_attributes(project_params)
                                   .build
 
@@ -54,7 +54,11 @@ module Admin
 
       # Only allow a trusted parameter "white list" through.
       def project_params
-        params.require(:project).permit(:name, :description)
+        params.require(:project).permit(:name, :description, :account_id)
+      end
+
+      def set_accounts
+        @accounts = current_user.accounts.pluck(:name, :id)
       end
   end
 end
