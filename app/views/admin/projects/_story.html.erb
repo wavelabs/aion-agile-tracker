@@ -3,11 +3,9 @@
   <td style="width: 1%;"><%= story.points if story.estimated? && story.points? %></td>
   <td>
     <%= link_to story.title, project_story_path(@project, story), class: 'Story-title' %>
-    (
-      <% story.owners.each do |owner| %>
-        <%= link_to owner.abbr, [@project, :stories, q: { owners_id_eq: owner.id }] %>
-      <% end %>
-    ) <br>
+    <% if story.owners.any? %>
+      ( <%= owner_list_links(story) %> )
+    <% end %>
     <%= label_list_links(story) %>
     </td>
   <td style="width: 13%;" class="text-right"><%= story_action_button(story) %></td>

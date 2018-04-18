@@ -42,7 +42,7 @@ class Project < ApplicationRecord
   end
 
   def current_iteration
-    iterations.current.first
+    iterations.current
   end
 
   def avg_velocity
@@ -56,6 +56,19 @@ class Project < ApplicationRecord
 
   def count_stories
     stories.count
+  end
+
+  def update_iterations_from(init_iteration)
+    init_iteration.update(end_date: init_iteration.start_date + iteration_duration_in_weeks.week - EXTRA_DAY_TO_COMPLETE_WEEK.day)
+    active_iterations
+      .from_id(init_iteration.id)
+      .order(:id)
+      .inject(init_iteration) do |prev_iteration, iteration|
+        start_date = prev_iteration.end_date + 1.day
+        end_date   = start_date + iteration_duration_in_weeks.week - EXTRA_DAY_TO_COMPLETE_WEEK.day
+        iteration.update(start_date: start_date, end_date: end_date)
+        iteration
+    end
   end
 
   def find_next_iteration_for_story(story)

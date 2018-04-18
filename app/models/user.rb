@@ -50,11 +50,13 @@ class User < ApplicationRecord
 
   attr_accessor :company_name
 
+  scope :from_account, ->(account) { joins(:accounts).where(accounts: {id: account.id}) }
+
   def role_for(company)
     accounts_users.find_by(company: company).role
   end
 
   def abbr
-    email.first.upcase
+    username.first.upcase
   end
 end

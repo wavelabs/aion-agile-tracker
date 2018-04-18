@@ -7,7 +7,7 @@
             <thead>
               <tr>
                 <th colspan="5">
-                  <small><%= "#{iteration.start_date.strftime('%b %e')} - #{iteration.end_date.strftime('%b %e')}" %> - <%= "#{iteration.points_done} of #{iteration.total_points}" %> - Velocity <%= render 'velocity_form', iteration: iteration %></small>
+                  <small><%= render 'iteration_dates_form', iteration: iteration %> - <%= "#{iteration.points_done} of #{iteration.total_points}" %> - Velocity <%= iteration.velocity %></small>
                 </th>
               </tr>
             </thead>

@@ -2,11 +2,11 @@ module Admin
   class StoriesController < BaseController
     before_action :set_project
     before_action :set_story,                 only: [:show, :edit, :update, :destroy]
-    before_action :set_pickable_requesters,   only: [:new, :edit, :create, :update]
+    before_action :set_collaborators,         only: [:new, :edit, :create, :update]
 
     # GET /stories
     def index
-      @stories       = Story.ransack(params[:q]).result.order_by_weight
+      @stories       = @project.stories.includes(:owners, :requester, :labels).ransack(params[:q]).result.order_by_weight
       @total_points  = @stories.features.sum(:points)
       @points_done   = @stories.features.accepted.sum(:points)
       @total_stories = @stories.count
@@ -60,7 +60,7 @@ module Admin
       # Only allow a trusted parameter "white list" through.
       def story_params
         params.require(:story)
-              .permit(:title, :description, :points, :requester_id, :story_type, :label_list)
+              .permit(:title, :description, :points, :requester_id, :story_type, :label_list, owner_ids: [])
               .tap do |params|
                 params[:points] = 0 unless params[:story_type] == 'feature'
                 params[:project_id] = @project.id
@@ -71,8 +71,8 @@ module Admin
         @project = current_user.projects.find params[:project_id]
       end
 
-      def set_pickable_requesters
-        @requesters = @project.account.users
+      def set_collaborators
+        @collaborators = User.invitation_accepted.from_account(@project.account).pluck(:username, :id)
       end
 
       def create_story

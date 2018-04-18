@@ -125,4 +125,9 @@ $(document).ready(function() {
                                 }
                           });
   }
+
+  var $storyOwners = $('#story_owners')
+  if($storyOwners.length) {
+    $storyOwners.selectize();
+  }
 });

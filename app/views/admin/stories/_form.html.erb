@@ -33,7 +33,14 @@
       <div class="col-md-12">
         <div class="form-group">
           <%= form.label :requester_id, class: 'form-label' %>
-          <%= form.select :requester_id, requesters.pluck(:email, :id), {}, id: :requester_id, class: 'form-control custom-select' %>
+          <%= form.select :requester_id, collaborators, {default: current_user}, id: :requester_id, class: 'form-control custom-select' %>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= form.label :owner_ids, class: 'form-label' %>
+          <%= form.select :owner_ids, collaborators, {}, multiple: true, id: :story_owners, class: 'form-control custom-select' %>
         </div>
       </div>
 
@@ -46,7 +53,7 @@
 
       <div class="col-md-12">
         <div class="form-group">
-          <%= form.label :label_list, 'Labels (separated by commas)' %><b, class: 'form-label'r/>
+          <%= form.label :label_list, 'Labels (separated by commas)', class: 'form-label' %>
           <%= form.text_field :label_list, class: 'form-control', id: :story_label_list, data: { url: project_tags_url(project) } %>
         </div>
       </div>

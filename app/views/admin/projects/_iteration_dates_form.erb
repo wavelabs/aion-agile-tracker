@@ -1,0 +1,16 @@
+<div class="dropdown">
+  <span class="dropdown-toggle" data-toggle="dropdown">
+     <%= "#{iteration.start_date.strftime('%b %e')} - #{iteration.end_date.strftime('%b %e')}" %>
+  </span>
+  <div class="dropdown-menu">
+    <%= form_for iteration.project, url: [iteration.project, iteration], method: :put do |f| %>
+      <%= f.label 'Duration in weeks', class: 'form-label' %>
+      <div class="input-group">
+        <%= f.text_field :iteration_duration_in_weeks, class: 'form-control' %>
+        <div class="input-group-append">
+          <%= f.submit 'Change', class: 'btn btn-primary btn-block'%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
