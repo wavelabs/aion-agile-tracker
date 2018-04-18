@@ -6,6 +6,7 @@
         <div class="card-options">
           <a class="btn btn-secondary btn-sm">Edit</a>
           <%= link_to 'Create Project', new_project_path(account_id: account.id), class: 'btn btn-secondary btn-sm ml-2' %>
+          <%= link_to 'Add Colaborator', new_account_user_invitation_path(account), class: 'btn btn-secondary btn-sm ml-3' %>
         </div>
       </div>
       <div class="table-responsive">

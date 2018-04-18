@@ -13,6 +13,7 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'devise', git: 'https://github.com/plataformatec/devise.git', branch: 'master'
+gem 'devise_invitable', '~> 1.7.0'
 gem 'figaro'
 gem 'redcarpet'
 gem 'acts-as-taggable-on'
@@ -39,6 +40,7 @@ group :test do
   gem 'database_cleaner'
   gem 'minitest-around'
   gem 'minitest', '5.10.1'
+  gem 'simplecov', require: false
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -3,19 +3,26 @@ require 'test_helper'
 class HappyPathTest < ActionDispatch::IntegrationTest
   setup do
     @admin_role = Role.find_or_create_by(name: 'admin')
+    @user_role  = Role.find_or_create_by(name: 'user')
   end
 
   test 'from registration to accept your first feature story' do
     register_new_user
+    invite_collaborators
     create_project
     create_feature_story
     estimate_story
+    join_as_collaborator
     follow_up_to_accept
   end
 
   private
 
-  attr_reader :user, :account, :project, :iteration, :story
+  attr_reader :user, :account, :project, :iteration, :story, :collaborator
+
+  def account
+    @account ||= user.accounts.first
+  end
 
   def register_new_user
     get '/users/sign_up'
@@ -83,6 +90,8 @@ class HappyPathTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_response :success
 
+    assert_includes story.owners, collaborator
+
     patch  "/admin/projects/#{project.id}/stories/#{story.id}/finish"
     assert_response :redirect
     follow_redirect!
@@ -102,5 +111,23 @@ class HappyPathTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     follow_redirect!
     assert_response :success
+  end
+
+  def invite_collaborators
+    get "/admin/accounts/#{account.id}/invitation/new"
+    assert_response :success
+
+    post "/admin/accounts/#{account.id}/invitation", params: { user: { email: 'sample@sample.com' } }
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+
+    @collaborator = User.find_by(email: 'sample@sample.com' )
+    assert_includes collaborator.accounts, account
+    assert collaborator.accounts.find_by(name: 'sample@sample.com')
+  end
+
+  def join_as_collaborator
+    sign_in collaborator
   end
 end
