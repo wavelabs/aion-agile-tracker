@@ -1,15 +1,5 @@
 <%= form_with(model: account, local: true, html: {class: 'card'}) do |form| %>
-  <% if account.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
-
-      <ul>
-      <% account.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'admin/shared/model_card_error', model: account %>
 
   <div class="card-body">
     <div class="form-group">

@@ -1,14 +1,5 @@
 <%= form_with(model: project, local: true, html: {class: 'card'}) do |form| %>
-  <% if project.errors.any? %>
-    <div class="card-alert alert alert-danger mb-0">
-      <p><strong>Errors:</strong></p>
-      <ul>
-      <% project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'admin/shared/model_card_error', model: project %>
 
   <div class="card-body">
     <div class="row">
