@@ -35,4 +35,8 @@ class Iteration < ApplicationRecord
     return new_velocity == velocity
     update(velocity: new_velocity)
   end
+
+  def story_fits?(story)
+    !story.estimated? || (story.points + total_points) <= velocity
+  end
 end

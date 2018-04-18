@@ -9,10 +9,10 @@ Rails.application.routes.draw do
 
   namespace :admin, as: nil do
     get 'dashboard', to: 'dashboard#show'
-    get ':id/profile', to: 'profiles#show', as: :user_profile
     get 'profile', to: 'profiles#show', as: :profile
     resources :projects, except: [:index] do
       resources :tags, only: [:index]
+      resources :iterations, only: [:update]
       resources :stories do
         resources :comments, only: [:create, :update]
 

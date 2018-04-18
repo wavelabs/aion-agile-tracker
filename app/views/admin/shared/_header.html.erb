@@ -39,32 +39,26 @@
         </div-->
         <div class="dropdown">
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
-            <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
+            <!--span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span-->
             <span class="ml-2 d-none d-lg-block">
-              <span class="text-default"><%= current_user.abbr %></span>
-              <small class="text-muted d-block mt-1">Administrator</small>
+              <span class="text-default"><%= current_user.username %></span>
+              <small class="text-muted d-block mt-1"><%= current_user.email %></small>
             </span>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-            <a class="dropdown-item" href="#">
-              <i class="dropdown-icon fe fe-user"></i> Profile
-            </a>
-            <a class="dropdown-item" href="#">
-              <i class="dropdown-icon fe fe-settings"></i> Settings
-            </a>
+            <%= link_to profile_path, class: 'dropdown-item' do %>
+              <i class="dropdown-icon fa fa-user"></i> Profile
+            <% end %>
             <!--a class="dropdown-item" href="#">
               <span class="float-right"><span class="badge badge-primary">6</span></span>
               <i class="dropdown-icon fe fe-mail"></i> Inbox
             </a-->
             <%= link_to accounts_path, class: 'dropdown-item' do %>
-              <i class="dropdown-icon fe fe-settings"></i> Accounts
+              <i class="dropdown-icon fa fa-building"></i> Accounts
             <% end %>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <i class="dropdown-icon fe fe-help-circle"></i> Need help?
-            </a>
             <%= link_to destroy_user_session_path, class: 'dropdown-item', method: :delete do %>
-              <i class="dropdown-icon fa fa-exit"></i> Sign out
+              <i class="dropdown-icon fa fa-sign-out"></i> Sign out
             <% end %>
           </div>
         </div>

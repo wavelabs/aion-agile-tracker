@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: companies
+# Table name: accounts
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -9,13 +9,13 @@
 #
 
 FactoryGirl.define do
-  factory :company do
+  factory :account do
     name         'Company Name'
 
     trait :with_admin do
-      after(:create) do |company, evaluator|
+      after(:create) do |account, evaluator|
         user = create(:user)
-        company.companies_users.create(user: user, role: Role.admin)
+        account.accounts_users.create(user: user, role: Role.admin)
       end
     end
   end

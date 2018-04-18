@@ -2,8 +2,7 @@
   <legend>Detail</legend>
   <dl>
     <dt>Email:</dt>
-    <dd><%= @user.email %></dd>
+    <dd><%= current_user.email %></dd>
   </dl>
 </fieldset>
 
-<%= render 'companies', companies: @user.companies %>

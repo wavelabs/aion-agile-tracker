@@ -21,5 +21,10 @@ FactoryGirl.define do
     end_date "2018-04-14"
     project nil
     velocity 1
+
+    trait :active do
+      start_date { Date.today.beginning_of_week }
+      end_date   { Date.today.end_of_week }
+    end
   end
 end

@@ -1,0 +1,15 @@
+<div class="dropdown">
+  <span class="dropdown-toggle" data-toggle="dropdown">
+     <%= iteration.velocity %>
+  </span>
+  <div class="dropdown-menu">
+    <%= form_for [iteration.project, iteration], method: :put do |f| %>
+      <div class="input-group">
+        <%= f.text_field :velocity, class: 'form-control' %>
+        <div class="input-group-append">
+          <%= f.submit 'Change', class: 'btn btn-primary btn-block'%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

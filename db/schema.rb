@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180417192122) do
+ActiveRecord::Schema.define(version: 20180418155244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 20180417192122) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "account_id"
+    t.integer "velocity", default: 10
+    t.integer "iteration_duration_in_weeks", default: 1
     t.index ["account_id"], name: "index_projects_on_account_id"
   end
 
