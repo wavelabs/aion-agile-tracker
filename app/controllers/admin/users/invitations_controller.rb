@@ -27,10 +27,6 @@ module Admin
       def after_invite_path_for(inviter, invitee)
         accounts_path
       end
-
-      def update_resource_params
-        params.require(:user).permit(:password, :password_confirmation, :invitation_token, :username)
-      end
     end
   end
 end

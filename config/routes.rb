@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root 'welcome#show'
 
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    invitations:   'users/invitations'
   }
 
   namespace :admin, as: nil do
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
     end
     resources :tasks
     resources :accounts do
-      resources :invitation, only: [:new, :create], controller: 'users/invitations', as: 'user_invitations'
+      resources :invitation, only: [:new, :create, :update], controller: 'users/invitations', as: 'user_invitations'
     end
     resources :accounts_users, only: [:destroy]
   end
