@@ -8,9 +8,7 @@ module Admin
 
       def create
         super do |user|
-          collaborator_account = Account.find_or_create_by(name: user.email)
-          AccountsUser.find_or_create_by(account: collaborator_account, user: user, role: Role.admin)
-          AccountsUser.find_or_create_by(account: account, user: user, role: Role.user)
+          after_invite(user)
         end
       end
 
@@ -26,6 +24,15 @@ module Admin
 
       def after_invite_path_for(inviter, invitee)
         accounts_path
+      end
+
+      def after_invite(user)
+        if user.errors.empty?
+          collaborator_account = Account.find_or_create_by(name: user.email)
+          AccountsUser.find_or_create_by(account: collaborator_account, user: user, role: Role.admin)
+        end
+
+        AccountsUser.find_or_create_by(account: account, user: user, role: Role.user)
       end
     end
   end

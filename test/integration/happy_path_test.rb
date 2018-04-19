@@ -41,7 +41,7 @@ class HappyPathTest < ActionDispatch::IntegrationTest
   end
 
   def create_project
-    project_attrs = { name: 'Sample', description: 'Description' }
+    project_attrs = { name: 'Sample', description: 'Description', account_id: account.id }
 
     get '/admin/projects/new'
     assert_response :success
@@ -128,6 +128,7 @@ class HappyPathTest < ActionDispatch::IntegrationTest
   end
 
   def join_as_collaborator
+    @collaborator.update(username: 'Sample')
     sign_in collaborator
   end
 end
