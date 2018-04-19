@@ -5,8 +5,8 @@ module Admin
     # GET /accounts
     # GET /accounts.json
     def index
-      @accounts_owned_by_me = current_user.accounts.owned_by(current_user)
-      @accounts             = current_user.accounts.belongs(current_user)
+      @accounts_owned_by_me = Account.owned_by(current_user)
+      @accounts             = Account.belongs(current_user)
     end
 
     # GET /accounts/1
