@@ -1,10 +1,14 @@
-<tr class="Story <%= 'Story--accepted' if story.accepted? %>">
+<tr
+  id="Story-<%= story.id %>"
+  class="Story <%= story_classes(story) %>"
+  data-data="<%= story.to_json(only: [:id, :position, :iteration_id, :project_id]) %>"
+  draggable="<%= !story.accepted? %>">
   <td style="width: 1%;"><i class="fa <%= icon_for_story_type story.story_type %>"></i></td>
   <td style="width: 1%;"><%= story.points if story.estimated? && story.points? %></td>
   <td>
     <%= link_to story.title, project_story_path(@project, story), class: 'Story-title' %>
     <% if story.owners.any? %>
-      ( <%= owner_list_links(story) %> )
+      <span class="Story-owners">( <%= owner_list_links(story) %> )</span>
     <% end %>
     <%= label_list_links(story) %>
     </td>

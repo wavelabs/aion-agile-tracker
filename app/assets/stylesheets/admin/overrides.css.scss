@@ -25,9 +25,21 @@
     color: #495057;
   }
 
+  .Story--draggable { cursor: move; }
 }
+
 .Story--accepted {
   background-color: #C7D9B8;
+}
+
+.Story--release {
+  @extend .bg-info;
+  color: white;
+  .Story-title, .Story-owner { color: white; }
+}
+
+.Story--over {
+  border-bottom: 3px solid black;
 }
 
 .card-options {

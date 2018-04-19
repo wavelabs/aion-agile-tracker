@@ -22,7 +22,7 @@ class Project < ApplicationRecord
   belongs_to :account
 
   has_many :iterations
-  has_many :stories, through: :iterations
+  has_many :stories, -> { order(position: :asc) }, through: :iterations
   has_many :labels, through: :stories
   has_many :story_states
 

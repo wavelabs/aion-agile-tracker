@@ -39,9 +39,15 @@ module Admin
     # PATCH/PUT /stories/1
     def update
       if @story.update(story_params)
-        redirect_to @project, notice: 'Story was successfully updated.'
+        respond_to do |format|
+          format.html { redirect_to @project, notice: 'Story was successfully updated.' }
+          format.json { render json: 'OK' }
+        end
       else
-        render :edit
+        respond_to do |format|
+          format.html { render :edit }
+          format.json { render json: @story.errors.full_messages, status: 422 }
+        end
       end
     end
 
@@ -60,7 +66,7 @@ module Admin
       # Only allow a trusted parameter "white list" through.
       def story_params
         params.require(:story)
-              .permit(:title, :description, :points, :requester_id, :story_type, :label_list, owner_ids: [])
+              .permit(:iteration_id, :position, :title, :description, :points, :requester_id, :story_type, :label_list, owner_ids: [])
               .tap do |params|
                 params[:points] = 0 unless params[:story_type] == 'feature'
                 params[:project_id] = @project.id

@@ -14,6 +14,7 @@
 #  story_state  :string
 #  group        :string
 #  iteration_id :integer
+#  position     :integer
 #
 # Indexes
 #
@@ -24,6 +25,7 @@
 class Story < ApplicationRecord
   include AASM
 
+  acts_as_list scope: [:iteration_id]
   acts_as_taggable_on :labels, :epics
   acts_as_commentable
 
@@ -48,9 +50,8 @@ class Story < ApplicationRecord
 
   scope :order_by_weight, ->() do
     weight_order = Arel.sql(%Q{
-        CASE WHEN #{table_name}.story_type = 'release' AND #{table_name}.story_type is not null THEN 99
-             WHEN #{table_name}.story_state = 'accepted' AND #{table_name}.story_type is not null is not null THEN 0
-        ELSE 1 END
+        CASE WHEN #{table_name}.story_state = 'accepted' AND #{table_name}.story_type is not null THEN 0
+        ELSE #{table_name}.position END
     })
     order(weight_order)
   end
