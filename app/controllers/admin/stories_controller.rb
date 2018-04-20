@@ -32,6 +32,7 @@ module Admin
       if @story.save
         redirect_to @project, notice: 'Story was successfully created.'
       else
+        puts ">>> #{@story.errors.full_messages}"
         render :new
       end
     end

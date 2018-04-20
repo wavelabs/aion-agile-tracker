@@ -23,8 +23,15 @@ FactoryGirl.define do
     name         'Project Name'
 
     trait :with_active_iteration do
+      transient do
+        active_iterations_count 0
+      end
+
       after(:create) do |project, evaluator|
         project.iterations << create(:iteration, :active, project: project)
+        evaluator.active_iterations_count.times do |i|
+          project.build_iteration_from_last_iteration.save
+        end
       end
     end
   end

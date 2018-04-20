@@ -9,12 +9,6 @@ module Admin
       @accounts             = Account.belongs(current_user)
     end
 
-    # GET /accounts/1
-    # GET /accounts/1.json
-    def show
-      @users = @account.users
-    end
-
     # GET /accounts/new
     def new
       @account = current_user.accounts.build
@@ -25,7 +19,6 @@ module Admin
     end
 
     # POST /accounts
-    # POST /accounts.json
     def create
       @account = ::NewAccountBuilder.new
                                     .assign_attributes(account_params)

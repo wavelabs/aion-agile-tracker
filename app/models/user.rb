@@ -48,13 +48,7 @@ class User < ApplicationRecord
   has_many :stories, through: :owners_stories
   has_many :owners_stories
 
-  attr_accessor :company_name
-
   scope :from_account, ->(account) { joins(:accounts).where(accounts: {id: account.id}) }
-
-  def role_for(company)
-    accounts_users.find_by(company: company).role
-  end
 
   def abbr
     username.first.upcase

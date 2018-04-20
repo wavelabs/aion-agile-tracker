@@ -36,5 +36,9 @@ FactoryGirl.define do
     trait :unestimated do
       points -1
     end
+
+    trait :feature do
+      story_type 'feature'
+    end
   end
 end
