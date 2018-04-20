@@ -94,7 +94,7 @@ class Story < ApplicationRecord
   end
 
   def estimated?
-    points != POINTS.first
+    points != POINTS.first && feature?
   end
 
   TYPES.each do |type|

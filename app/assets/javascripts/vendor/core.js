@@ -142,11 +142,9 @@ $(document).ready(function() {
 
     function handleDragEnter(e) {
       var isIteration = this.classList.contains('Iteration');
-      if(isIteration) {
-        this.classList.add('Iteration--over');
-      } else {
-        this.classList.add('Story--over');
-      }
+
+      if (isIteration) { return this.classList.add('Iteration--over'); }
+      this.classList.add('Story--over');
     }
 
     function handleDragOver(e) {
@@ -157,13 +155,14 @@ $(document).ready(function() {
 
     function handleDragLeave(e) {
       this.classList.remove('Story--over');
+      this.classList.remove('Iteration--over');
     }
 
     function handleDrop(e) {
       e.stopPropagation();
-      var isIteration = this.classList.contains('Iteration');
-      var elementId = e.dataTransfer.getData('text');
-      var originalElement = document.getElementById(elementId)
+      var isIteration     = this.classList.contains('Iteration');
+      var elementId       = e.dataTransfer.getData('text');
+      var originalElement = document.getElementById(elementId);
 
       if(isIteration) {
         this.querySelector('tbody').appendChild(originalElement)
@@ -179,16 +178,17 @@ $(document).ready(function() {
       stories = document.querySelectorAll('.Iteration .Story');
       iterations = document.querySelectorAll('.Iteration');
 
-      [].forEach.call(stories, function (story, index) {
-        story.classList.remove('Story--over');
-        data = JSON.parse(story.getAttribute('data-data'));
-        data.position = index + 1
-        data.iteration_id = story.closest('.Iteration').getAttribute('data-id');
-        update_position_remotely(data);
-      });
-
       [].forEach.call(iterations, function (iteration, index) {
+        var stories = iteration.querySelectorAll('.Story');
+
         iteration.classList.remove('Iteration--over');
+        [].forEach.call(stories, function (story, index) {
+          story.classList.remove('Story--over');
+          data = JSON.parse(story.getAttribute('data-data'));
+          data.position = index + 1
+          data.iteration_id = iteration.getAttribute('data-id');
+          update_position_remotely(data);
+        })
       })
     }
 

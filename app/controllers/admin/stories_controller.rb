@@ -32,7 +32,6 @@ module Admin
       if @story.save
         redirect_to @project, notice: 'Story was successfully created.'
       else
-        puts ">>> #{@story.errors.full_messages}"
         render :new
       end
     end
@@ -68,10 +67,14 @@ module Admin
       def story_params
         params.require(:story)
               .permit(:iteration_id, :position, :title, :description, :points, :requester_id, :story_type, :label_list, owner_ids: [])
-              .tap do |params|
-                params[:points] = 0 unless params[:story_type] == 'feature'
-                params[:project_id] = @project.id
-              end
+
+      end
+
+      def create_params
+        story_params.tap do |params|
+          params[:points] = 0 unless params[:story_type] == 'feature'
+          params[:project_id] = @project.id
+        end
       end
 
       def set_project
@@ -83,7 +86,7 @@ module Admin
       end
 
       def create_story
-        story           = @project.stories.build(story_params)
+        story           = @project.stories.build(create_params)
         story.iteration = @project.find_next_iteration_for_story(story)
         story
       end

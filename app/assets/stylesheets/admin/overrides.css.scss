@@ -21,11 +21,21 @@
 }
 
 .Iteration {
-  .Story-title {
-    color: #495057;
+  &.Iteration--over {
+    table { border-bottom: 3px solid black; }
   }
 
-  .Story--draggable { cursor: move; }
+  .Story {
+    &.Story--dragging { opacity: 0.4; }
+    &.Story--draggable { cursor: move; }
+    &.Story--over { border-bottom: 3px solid black; }
+
+    .Story-title { color: #495057; }
+
+    &.Story--release {
+      @extend .Story--release
+    }
+  }
 }
 
 .Story--accepted {
@@ -36,10 +46,6 @@
   @extend .bg-info;
   color: white;
   .Story-title, .Story-owner { color: white; }
-}
-
-.Story--over {
-  border-bottom: 3px solid black;
 }
 
 .card-options {

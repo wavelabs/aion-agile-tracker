@@ -68,6 +68,7 @@ module StoriesHelper
       classes << 'Story--draggable'
     end
     classes << "Story--#{story.story_type}"
+    classes << "Story--#{story.story_state}"
     classes.join(' ')
   end
 end
