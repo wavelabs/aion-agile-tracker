@@ -23,7 +23,7 @@ module StoriesHelper
 
   def owner_list_links(story)
     story.owners.map do |owner|
-      link_to owner.abbr, [story.project, :stories, q: { owner_ids_in: owner.id }]
+      link_to owner.abbr, [story.project, :stories, q: { owner_ids_in: owner.id }], class: 'Story-owner'
     end.join(', ').html_safe
   end
 
@@ -58,5 +58,17 @@ module StoriesHelper
   def story_action_button(story)
     return if story.accepted?
     state_button(story) || estimation_buttons(story)
+  end
+
+  def story_classes(story)
+    classes = []
+    if story.accepted?
+      classes << 'Story--accepted'
+    else
+      classes << 'Story--draggable'
+    end
+    classes << "Story--#{story.story_type}"
+    classes << "Story--#{story.story_state}"
+    classes.join(' ')
   end
 end

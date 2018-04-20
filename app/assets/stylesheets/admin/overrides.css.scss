@@ -21,13 +21,31 @@
 }
 
 .Iteration {
-  .Story-title {
-    color: #495057;
+  &.Iteration--over {
+    table { border-bottom: 3px solid black; }
   }
 
+  .Story {
+    &.Story--dragging { opacity: 0.4; }
+    &.Story--draggable { cursor: move; }
+    &.Story--over { border-bottom: 3px solid black; }
+
+    .Story-title { color: #495057; }
+
+    &.Story--release {
+      @extend .Story--release
+    }
+  }
 }
+
 .Story--accepted {
   background-color: #C7D9B8;
+}
+
+.Story--release {
+  @extend .bg-info;
+  color: white;
+  .Story-title, .Story-owner { color: white; }
 }
 
 .card-options {

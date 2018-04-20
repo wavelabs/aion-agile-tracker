@@ -25,7 +25,7 @@ Rails.application.routes.draw do
       end
     end
     resources :tasks
-    resources :accounts do
+    resources :accounts, except: [:show] do
       resources :invitation, only: [:new, :create, :update], controller: 'users/invitations', as: 'user_invitations'
     end
     resources :accounts_users, only: [:destroy]

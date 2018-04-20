@@ -14,6 +14,7 @@
 #  story_state  :string
 #  group        :string
 #  iteration_id :integer
+#  position     :integer
 #
 # Indexes
 #
@@ -34,6 +35,10 @@ FactoryGirl.define do
 
     trait :unestimated do
       points -1
+    end
+
+    trait :feature do
+      story_type 'feature'
     end
   end
 end

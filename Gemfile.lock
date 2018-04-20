@@ -55,6 +55,8 @@ GEM
     acts-as-taggable-on (4.0.0)
       activerecord (>= 4.0)
     acts_as_commentable (4.0.2)
+    acts_as_list (0.9.11)
+      activerecord (>= 3.0)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
     annotate (2.6.5)
@@ -92,7 +94,8 @@ GEM
       thor (~> 0.14)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
-    i18n (0.8.1)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     json (2.1.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -192,7 +195,7 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
-    tzinfo (1.2.3)
+    tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
@@ -217,6 +220,7 @@ DEPENDENCIES
   aasm (~> 4.12, >= 4.12.3)
   acts-as-taggable-on
   acts_as_commentable
+  acts_as_list
   annotate
   byebug
   capybara (~> 2.13.0)

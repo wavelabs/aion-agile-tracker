@@ -14,8 +14,9 @@ FactoryGirl.define do
 
     trait :with_admin do
       after(:create) do |account, evaluator|
+        role = Role.find_or_create_by(name: 'admin')
         user = create(:user)
-        account.accounts_users.create(user: user, role: Role.admin)
+        account.accounts_users.create(user: user, role: role)
       end
     end
   end
