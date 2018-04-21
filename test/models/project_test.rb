@@ -34,6 +34,7 @@ describe Project do
         assert_equal (Date.today.beginning_of_week + 1.week), iteration.start_date
         assert_equal (Date.today.end_of_week + 1.week), iteration.end_date
         assert_equal 1, iteration.velocity
+        assert_equal 2, iteration.number
       end
     end
   end
@@ -48,6 +49,7 @@ describe Project do
       assert_equal Date.today.beginning_of_week, iteration.start_date
       assert_equal expected_end_date, iteration.end_date
       assert_equal 4, iteration.velocity
+      assert_equal 1, iteration.number
     end
   end
 end

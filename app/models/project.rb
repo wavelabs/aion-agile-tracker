@@ -15,7 +15,7 @@
 #
 #  index_projects_on_account_id  (account_id)
 #
-# Agile Project
+
 class Project < ApplicationRecord
   EXTRA_DAY_TO_COMPLETE_WEEK = 1
 
@@ -81,12 +81,12 @@ class Project < ApplicationRecord
     iteration = active_iterations.last
     return unless iteration
     day_diff = (iteration.end_date - iteration.start_date).to_i + EXTRA_DAY_TO_COMPLETE_WEEK
-    iterations.build(start_date: iteration.start_date + day_diff.days, end_date: iteration.end_date + day_diff.days, velocity: iteration.velocity)
+    iterations.build(start_date: iteration.start_date + day_diff.days, end_date: iteration.end_date + day_diff.days, velocity: iteration.velocity, number: iteration.number + 1)
   end
 
   def build_first_iteration
     start_date = Date.today.beginning_of_week
     end_date   = start_date + iteration_duration_in_weeks.week - EXTRA_DAY_TO_COMPLETE_WEEK.day
-    iterations.build(start_date: start_date, end_date: end_date, velocity: velocity)
+    iterations.build(start_date: start_date, end_date: end_date, velocity: velocity, number: 1)
   end
 end
