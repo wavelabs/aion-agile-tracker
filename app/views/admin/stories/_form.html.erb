@@ -15,18 +15,15 @@
 
       <div class="col-md-12">
         <div class="form-group">
-          <%= form.label :description, class: 'form-label' %>
-          <%= form.text_area :description, id: :story_description, class: 'form-control' %>
-          <p class="hint">
-            Markdown sopported
-          </p>
+          <%= form.label :story_type, class: 'form-label' %>
+          <%= form.select :story_type, Story::TYPES, {}, id: :story_type, class: 'form-control custom-select' %>
         </div>
       </div>
 
       <div class="col-md-12">
         <div class="form-group">
-          <%= form.label :points, class: 'form-label' %>
-          <%= form.select :points, Story::POINTS, {}, id: :story_points, class: 'form-control custom-select' %>
+          <%= form.label :points, 'Estimations', class: 'form-label' %>
+          <%= form.select :points, humanize_story_points(Story::POINTS), {}, id: :story_points, class: 'form-control custom-select', disabled: disable_estimations?(story) %>
         </div>
       </div>
 
@@ -39,15 +36,8 @@
 
       <div class="col-md-12">
         <div class="form-group">
-          <%= form.label :owner_ids, class: 'form-label' %>
+          <%= form.label :owner_ids, 'Owners', class: 'form-label' %>
           <%= form.select :owner_ids, collaborators, {}, multiple: true, id: :story_owners, class: 'form-control custom-select' %>
-        </div>
-      </div>
-
-      <div class="col-md-12">
-        <div class="form-group">
-          <%= form.label :story_type, class: 'form-label' %>
-          <%= form.select :story_type, Story::TYPES, {}, id: :story_type, class: 'form-control custom-select' %>
         </div>
       </div>
 
@@ -55,6 +45,16 @@
         <div class="form-group">
           <%= form.label :label_list, 'Labels (separated by commas)', class: 'form-label' %>
           <%= form.text_field :label_list, class: 'form-control', id: :story_label_list, data: { url: project_tags_url(project) } %>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= form.label :description, class: 'form-label' %>
+          <%= form.text_area :description, id: :story_description, class: 'form-control' %>
+          <p class="hint">
+            Markdown sopported
+          </p>
         </div>
       </div>
     </div>

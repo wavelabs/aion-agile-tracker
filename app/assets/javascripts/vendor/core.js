@@ -126,6 +126,17 @@ $(document).ready(function() {
                           });
   }
 
+  var $storyType = $('#story_type');
+  if ($storyType.length) {
+    $storyType.on('change', function (e) {
+      if (this.value != 'feature') {
+        $('#story_points').attr('disabled', true)
+      } else {
+        $('#story_points').attr('disabled', false)
+      }
+    });
+  }
+
   var $storyOwners = $('#story_owners');
   if($storyOwners.length) {
     $storyOwners.selectize();

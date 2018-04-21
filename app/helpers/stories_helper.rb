@@ -1,11 +1,13 @@
 module StoriesHelper
-  def icon_for_story_type(type)
-    case type
-    when 'bug' then 'fa-bug'
-    when 'chore' then 'fa-gear'
-    when 'release' then 'fa-flag'
-    when 'feature' then 'fa-star'
-    end
+  def story_type_icon(type)
+    icon = case type
+           when 'bug' then 'fa-bug'
+           when 'chore' then 'fa-gear'
+           when 'release' then 'fa-flag'
+           when 'feature' then 'fa-star'
+           end
+
+    tag.i class: "fa #{icon}"
   end
 
   def label_list_to_html(labels)
@@ -70,5 +72,14 @@ module StoriesHelper
     classes << "Story--#{story.story_type}"
     classes << "Story--#{story.story_state}"
     classes.join(' ')
+  end
+
+  def humanize_story_points(points)
+    points.map { |point| [ pluralize(point, 'point'), point ] }
+          .tap { |points| points[0][0] = 'Unestimated' }
+  end
+
+  def disable_estimations?(story)
+    !story.feature? && !story.new_record?
   end
 end

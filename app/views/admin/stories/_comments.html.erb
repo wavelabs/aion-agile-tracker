@@ -2,6 +2,7 @@
   <div class="card-header">
       <div class="card-title">Comments</div>
   </div>
+  <% if comments.any? %>
   <div class="card-body">
     <% comments.each do |comment| %>
       <div class="row">
@@ -17,6 +18,7 @@
       </div>
     <% end %>
   </div>
+  <% end %>
   <div class="card-footer text-right">
     <%= render 'admin/comments/form', comment: @story.comments.build %>
   </div>

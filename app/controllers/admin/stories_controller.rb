@@ -72,7 +72,6 @@ module Admin
 
       def create_params
         story_params.tap do |params|
-          params[:points] = 0 unless params[:story_type] == 'feature'
           params[:project_id] = @project.id
         end
       end

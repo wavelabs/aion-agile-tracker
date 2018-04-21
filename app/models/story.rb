@@ -5,7 +5,7 @@
 #  id           :integer          not null, primary key
 #  title        :string
 #  description  :text
-#  points       :integer
+#  points       :integer          default("-1")
 #  requester_id :integer
 #  project_id   :integer
 #  created_at   :datetime         not null
@@ -96,6 +96,10 @@ class Story < ApplicationRecord
 
   def estimated?
     points != POINTS.first && feature?
+  end
+
+  def comments?
+    comments.any?
   end
 
   TYPES.each do |type|
