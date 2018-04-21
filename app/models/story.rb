@@ -46,7 +46,8 @@ class Story < ApplicationRecord
   has_many :owners_stories, dependent: :destroy
   has_many :owners, -> { distinct }, through: :owners_stories
 
-  scope :features, ->() { where(story_type: 'feature') }
+  scope :features, ->()  { where(story_type: 'feature') }
+  scope :estimated, ->() { features.where('points >= 0') }
 
   scope :order_by_weight, ->() do
     weight_order = Arel.sql(%Q{

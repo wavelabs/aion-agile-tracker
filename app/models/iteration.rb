@@ -27,11 +27,11 @@ class Iteration < ApplicationRecord
   end
 
   def total_points
-    stories.features.sum(:points)
+    stories.estimated.sum(:points)
   end
 
   def points_done
-    stories.features.accepted.sum(:points)
+    stories.estimated.accepted.sum(:points)
   end
 
   def calculate_iteration_velocity
