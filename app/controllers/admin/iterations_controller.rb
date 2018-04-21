@@ -11,6 +11,12 @@ module Admin
       redirect_to project
     end
 
+    def finish
+      FinishIteration.call(iteration)
+
+      redirect_to done_project_iterations_path, notice: "Iteration No. #{iteration.number} has finished."
+    end
+
     private
 
     def iteration

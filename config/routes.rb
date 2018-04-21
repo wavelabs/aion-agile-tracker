@@ -16,6 +16,10 @@ Rails.application.routes.draw do
         collection do
           get 'done', to: 'iterations#index'
         end
+
+        member do
+          put 'finish', to: 'iterations#finish'
+        end
       end
       resources :stories do
         resources :comments, only: [:create, :update]

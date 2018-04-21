@@ -59,9 +59,11 @@
 }
 
 .Story--release {
-  @extend .bg-info;
+  background-color: #45aaf2;
   color: white;
-  .Story-title, .Story-owner { color: white; }
+  .Story-title, .Story-owner, .Story-label { color: white; }
+
+  &.Story--rejected { background-color: #923030; }
 }
 
 .card-options {

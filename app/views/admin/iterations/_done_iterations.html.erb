@@ -6,7 +6,7 @@
           <table class="table card-table">
             <thead>
               <tr>
-                <th colspan="5">
+                <th colspan="4">
                   <a href="" class="Iteration-collapsable-button" data-toggle="iteration-collapse">
                     <i class="fa fa-caret-down"></i>
                   </a>
@@ -16,6 +16,9 @@
                     <%= "#{iteration.points_done} of #{iteration.total_points}" %> -
                     Velocity <%= iteration.velocity %>
                   </small>
+                </th>
+                <th style="width: 13%" class="text-right">
+                  <%= link_to 'Finish', finish_project_iteration_path(iteration.project, iteration), class: 'btn btn-sm btn-primary', method: :put %>
                 </th>
               </tr>
             </thead>
