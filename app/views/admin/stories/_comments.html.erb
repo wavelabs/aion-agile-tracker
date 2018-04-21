@@ -2,19 +2,21 @@
   <div class="card-header">
       <div class="card-title">Comments</div>
   </div>
-  <table class="table card-table table-vcenter text-nowrap">
+  <div class="card-body">
     <% comments.each do |comment| %>
-      <tr>
-        <th style="width: 10%"><%= comment.user_abbr %> says:</th>
-        <td><%= markdown(comment.comment) %></td>
-        <th style="width: 2%">
+      <div class="row">
+        <div class="col-md-1"><%= comment.user_abbr %> says:</div>
+        <div class="col-md-10">
+          <%= markdown(comment.comment) %>
+        </div>
+        <div class="col-md-1">
           <div class="dropdown">
             <button class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">Options</button>
           </div>
-        </th>
-      </tr>
+        </div>
+      </div>
     <% end %>
-  </table>
+  </div>
   <div class="card-footer text-right">
     <%= render 'admin/comments/form', comment: @story.comments.build %>
   </div>
