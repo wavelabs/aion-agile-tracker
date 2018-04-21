@@ -40,12 +40,6 @@ class Iteration < ApplicationRecord
     stories.estimated.accepted.sum(:points)
   end
 
-  def calculate_iteration_velocity
-    new_velocity = stories.accepted.sum(&:points)
-    return new_velocity == velocity
-    update(velocity: new_velocity)
-  end
-
   def story_fits?(story)
     !story.estimated? || (story.points + total_points) <= velocity
   end

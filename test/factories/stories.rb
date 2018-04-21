@@ -37,8 +37,16 @@ FactoryGirl.define do
       points -1
     end
 
-    trait :feature do
-      story_type 'feature'
+    Story::TYPES.each do |type|
+      trait type.to_sym do
+        story_type type
+      end
+    end
+
+    Story.aasm.states.map(&:name).each do |state|
+      trait state.to_sym do
+        story_state state
+      end
     end
   end
 end

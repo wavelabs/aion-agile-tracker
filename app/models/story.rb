@@ -46,7 +46,10 @@ class Story < ApplicationRecord
   has_many :owners_stories, dependent: :destroy
   has_many :owners, -> { distinct }, through: :owners_stories
 
-  scope :features, ->()  { where(story_type: 'feature') }
+  scope :features,  ->()  { where(story_type: 'feature') }
+  scope :releases,  ->()  { where(story_type: 'release') }
+  scope :but_releases, ->() { where.not(story_type: 'release') }
+  scope :not_accepted, ->() { where.not(story_state: 'accepted') }
   scope :estimated, ->() { features.where('points >= 0') }
 
   scope :order_by_weight, ->() do
@@ -55,6 +58,10 @@ class Story < ApplicationRecord
         ELSE #{table_name}.position END
     })
     order(weight_order)
+  end
+
+  TYPES.each do |type|
+    define_method("#{type}?") { self.story_type == type }
   end
 
   aasm column: 'story_state' do
@@ -76,7 +83,7 @@ class Story < ApplicationRecord
     end
 
     event :accept do
-      transitions from: :delivered, to: :accepted, after: :calculate_iteration_velocity
+      transitions from: :delivered, to: :accepted
     end
 
     event :reject do
@@ -101,15 +108,4 @@ class Story < ApplicationRecord
   def comments?
     comments.any?
   end
-
-  TYPES.each do |type|
-    define_method("#{type}?") { self.story_type == type }
-  end
-
-  private
-
-  def calculate_iteration_velocity
-    self.iteration.calculate_iteration_velocity
-  end
-
 end

@@ -18,7 +18,7 @@ module StoriesHelper
 
   def label_list_links(story)
     story.labels.map do |label|
-      link_to label.name, [story.project, :stories, q: { labels_name_in: label.name }]
+      link_to label.name, [story.project, :stories, q: { labels_name_in: label.name }], class: 'Story-label'
     end.join(', ').html_safe
   end
 
@@ -58,7 +58,7 @@ module StoriesHelper
   end
 
   def story_action_button(story)
-    return if story.accepted?
+    return if story.accepted? || (story.release? && story.rejected?)
     state_button(story) || estimation_buttons(story)
   end
 
