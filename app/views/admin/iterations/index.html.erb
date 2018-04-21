@@ -1,11 +1,11 @@
 <div class="page-header">
   <h1 class="page-title">
-    Project: <%= @project.name %>
+    Project: <%= @project.name %> - Done Iterations
   </h1>
   <div class="page-options d-flex">
     <%= link_to 'New Story', new_project_story_path(@project), class: 'btn btn-secondary' %>
-    <%= link_to 'Done', done_project_iterations_path(@project), class: 'btn btn-secondary' %>
+    <%= link_to 'Active', @project, class: 'btn btn-secondary' %>
   </div>
 </div>
 
-<%= render 'iterations', iterations: @active_iterations %> <br>
+<%= render 'done_iterations', iterations: @iterations %> <br>

@@ -1,5 +1,9 @@
 module Admin
   class IterationsController < BaseController
+    def index
+      @iterations = project.iterations.done
+    end
+
     def update
       project.update(project_params)
       project.update_iterations_from(iteration)

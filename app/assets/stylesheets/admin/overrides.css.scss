@@ -21,8 +21,18 @@
 }
 
 .Iteration {
+  .Iteration-collapsable-button {
+    color: #9aa0ac;
+    display: inline-block;
+  }
+
   &.Iteration--over {
     table { border-bottom: 3px solid black; }
+  }
+
+  &.Iteration--collapsed {
+    tbody { display: none; }
+    .fa-caret-down:before { content: "\f0da"; }
   }
 
   .Story {
@@ -40,6 +50,12 @@
 
 .Story--accepted {
   background-color: #C7D9B8;
+}
+
+.Iteration--done {
+  background-color: #C7D9B8;
+  .Iteration-title { color: black; }
+  .Iteration-collapsable-button { color: black; }
 }
 
 .Story--release {

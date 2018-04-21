@@ -47,6 +47,14 @@ $(document).ready(function() {
     return false;
   });
 
+  /** Function for collapse iteration */
+  $('[data-toggle="iteration-collapse"').on('click', function (e) {
+    var $card = $(this).closest(DIV_CARD);
+    $card.toggleClass('Iteration--collapsed');
+    e.preventDefault();
+    return false;
+  })
+
   /** Function for fullscreen card */
   $('[data-toggle="card-fullscreen"]').on('click', function(e) {
     var $card = $(this).closest(DIV_CARD);

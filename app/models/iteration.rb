@@ -21,10 +21,15 @@ class Iteration < ApplicationRecord
   has_many :stories
 
   scope :active,  ->() { where('? <= end_date', Date.today) }
+  scope :done,    ->() { where('? > end_date', Date.today) }
   scope :from_id, ->(id) { where('id > ?', id) }
 
   def self.current
     active.find_by('start_date <= ?', Date.today)
+  end
+
+  def current?
+    (start_date...end_date).include? Date.today
   end
 
   def total_points

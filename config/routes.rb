@@ -12,7 +12,11 @@ Rails.application.routes.draw do
     get 'profile', to: 'profiles#show', as: :profile
     resources :projects, except: [:index] do
       resources :tags, only: [:index]
-      resources :iterations, only: [:update]
+      resources :iterations, only: [:update] do
+        collection do
+          get 'done', to: 'iterations#index'
+        end
+      end
       resources :stories do
         resources :comments, only: [:create, :update]
 
