@@ -12,7 +12,6 @@
 #  updated_at   :datetime         not null
 #  story_type   :string
 #  story_state  :string
-#  group        :string
 #  iteration_id :integer
 #  position     :integer
 #

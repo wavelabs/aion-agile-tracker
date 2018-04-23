@@ -58,6 +58,10 @@
   .Iteration-collapsable-button { color: black; }
 }
 
+.Story--chore {
+  &.Story--finished { @extend .Story--accepted; }
+}
+
 .Story--release {
   background-color: #45aaf2;
   color: white;
