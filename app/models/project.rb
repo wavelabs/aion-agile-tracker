@@ -42,7 +42,7 @@ class Project < ApplicationRecord
   end
 
   def current_iteration
-    iterations.current
+    iterations.current || create_current_iteration
   end
 
   def avg_velocity
@@ -78,10 +78,15 @@ class Project < ApplicationRecord
   end
 
   def build_iteration_from_last_iteration
-    iteration = active_iterations.last
+    iteration = iterations.order(number: :desc).first
     return unless iteration
     day_diff = (iteration.end_date - iteration.start_date).to_i + EXTRA_DAY_TO_COMPLETE_WEEK
     iterations.build(start_date: iteration.start_date + day_diff.days, end_date: iteration.end_date + day_diff.days, velocity: iteration.velocity, number: iteration.number + 1)
+  end
+
+  def create_current_iteration
+    iteration = build_iteration_from_last_iteration || build_first_iteration
+    iteration.save && iteration
   end
 
   def build_first_iteration
