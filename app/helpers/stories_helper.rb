@@ -37,7 +37,7 @@ module StoriesHelper
 
   def state_button(story)
     return if story.feature? && !story.estimated?
-    story.aasm.events.map(&:name).map do |event|
+    story.aasm.events(:permitted => true).map(&:name).map do |event|
       self.public_send("#{event}_button", story)
     end.join('&nbsp;').html_safe
   end
@@ -64,11 +64,7 @@ module StoriesHelper
 
   def story_classes(story)
     classes = []
-    if story.accepted?
-      classes << 'Story--accepted'
-    else
-      classes << 'Story--draggable'
-    end
+    classes << 'Story--draggable' unless story.last_status?
     classes << "Story--#{story.story_type}"
     classes << "Story--#{story.story_state}"
     classes.join(' ')

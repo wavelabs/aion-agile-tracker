@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180421144402) do
+ActiveRecord::Schema.define(version: 20180423024059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,7 +92,6 @@ ActiveRecord::Schema.define(version: 20180421144402) do
     t.datetime "updated_at", null: false
     t.string "story_type"
     t.string "story_state"
-    t.string "group"
     t.bigint "iteration_id"
     t.integer "position"
     t.index ["iteration_id"], name: "index_stories_on_iteration_id"

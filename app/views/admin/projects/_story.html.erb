@@ -2,7 +2,7 @@
   id="Story-<%= story.id %>"
   class="Story <%= story_classes(story) %>"
   data-data="<%= story.to_json(only: [:id, :position, :iteration_id, :project_id]) %>"
-  draggable="<%= !story.accepted? %>">
+  draggable="<%= !story.last_status? %>">
   <td style="width: 1%;"><%= story_type_icon(story.story_type) %></td>
   <td style="width: 1%;"><%= story.points if story.estimated? %></td>
   <td style="width: 1%;">

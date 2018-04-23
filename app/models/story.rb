@@ -12,7 +12,6 @@
 #  updated_at   :datetime         not null
 #  story_type   :string
 #  story_state  :string
-#  group        :string
 #  iteration_id :integer
 #  position     :integer
 #
@@ -48,6 +47,7 @@ class Story < ApplicationRecord
 
   scope :features,  ->()  { where(story_type: 'feature') }
   scope :releases,  ->()  { where(story_type: 'release') }
+  scope :chores,    ->()  { where(story_type: 'chore') }
   scope :but_releases, ->() { where.not(story_type: 'release') }
   scope :not_accepted, ->() { where.not(story_state: 'accepted') }
   scope :estimated, ->() { features.where('points >= 0') }
@@ -55,6 +55,7 @@ class Story < ApplicationRecord
   scope :order_by_weight, ->() do
     weight_order = Arel.sql(%Q{
         CASE WHEN #{table_name}.story_state = 'accepted' AND #{table_name}.story_type is not null THEN 0
+             WHEN #{table_name}.story_state = 'finished' AND #{table_name}.story_type = 'chore' THEN 0
         ELSE #{table_name}.position END
     })
     order(weight_order)
@@ -79,15 +80,15 @@ class Story < ApplicationRecord
     end
 
     event :deliver do
-      transitions from: :finished, to: :delivered
+      transitions from: :finished, to: :delivered, guard: :not_release_nor_chore?
     end
 
     event :accept do
-      transitions from: :delivered, to: :accepted
+      transitions from: :delivered, to: :accepted, guard: :not_release_nor_chore?
     end
 
     event :reject do
-      transitions from: :delivered, to: :rejected
+      transitions from: :delivered, to: :rejected, guard: :not_release_nor_chore?
     end
   end
 
@@ -97,12 +98,26 @@ class Story < ApplicationRecord
   end
 
   def move_to_current_iteration
-    return if iteration == project.current_iteration
+    return if iteration == project.current_iteration || release?
     update(iteration: project.current_iteration)
+  end
+
+  def not_release_nor_chore?
+    feature? || bug?
   end
 
   def estimated?
     points != POINTS.first && feature?
+  end
+
+  def last_status?
+    if feature? || bug?
+      accepted?
+    elsif release? || chore?
+      finished?
+    else
+      false
+    end
   end
 
   def comments?
