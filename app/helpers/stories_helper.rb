@@ -49,8 +49,8 @@ module StoriesHelper
     end
 
     content = tag.div class: 'dropdown-menu' do
-      Story::POINTS.map do |point|
-        link_to(point, estimate_project_story_path(story.project, story, points: point), method: :patch, class: 'dropdown-item')
+      Story::POINTS[1..-1].map do |point|
+        link_to(pluralize(point, 'point'), estimate_project_story_path(story.project, story, points: point), method: :patch, class: 'dropdown-item')
       end.join('').html_safe
     end
 
