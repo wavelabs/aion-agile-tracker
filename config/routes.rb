@@ -38,4 +38,6 @@ Rails.application.routes.draw do
     end
     resources :accounts_users, only: [:destroy]
   end
+
+  mount ActionCable.server, at: '/cable'
 end

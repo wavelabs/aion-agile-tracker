@@ -30,6 +30,7 @@ module Admin
       @story = create_story
 
       if @story.save
+        broadcast_story
         redirect_to @project, notice: 'Story was successfully created.'
       else
         render :new
@@ -88,6 +89,16 @@ module Admin
         story           = @project.stories.build(create_params)
         story.iteration = @project.find_next_iteration_for_story(story)
         story
+      end
+
+      def broadcast_story
+        iteration_card_html = render_to_string('admin/projects/_iteration', locals: {iteration: @story.iteration}, layout: false)
+        project_row_html    = render_to_string('admin/projects/_story', locals: {story: @story}, layout: false)
+
+        ActionCable.server.broadcast "projects_channel",
+          story: @story.as_json,
+          project_row_html: project_row_html,
+          iteration_card_html: iteration_card_html
       end
   end
 

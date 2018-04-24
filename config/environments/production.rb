@@ -100,4 +100,8 @@ Rails.application.configure do
     :password       => ENV['SENDGRID_PASSWORD'],
     :domain         => ENV['SENDGRID_DOMAIN']
   }
+
+  config.action_cable.url = 'wss://aion-agile-manager.herokuapp.com/cable'
+  config.action_cable.allowed_request_origins = [
+    'https://aion-agile-manager.herokuapp.com' ]
 end

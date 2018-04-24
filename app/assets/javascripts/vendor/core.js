@@ -12,6 +12,111 @@ var hexToRgba = function(hex, opacity) {
   return 'rgba(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', ' + opacity + ')';
 };
 
+function handleIterationCollapse(e) {
+  var $card = $(this).closest(DIV_CARD);
+
+  $card.toggleClass('card-collapsed');
+
+  e.preventDefault();
+  return false;
+}
+
+function highlight(element) {
+  Velocity(element, { backgroundColor: '#ffff99' }, { duration: 300, loop: 1 });
+}
+
+function handleDragStart(e) {
+  this.style.opacity = '0.4';
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text', this.getAttribute('id'));
+}
+
+function handleDragEnter(e) {
+  var isIteration = this.classList.contains('Iteration');
+
+  if (isIteration) { return this.classList.add('Iteration--over'); }
+  this.classList.add('Story--over');
+}
+
+function handleDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  return false;
+}
+
+function handleDragLeave(e) {
+  this.classList.remove('Story--over');
+  this.classList.remove('Iteration--over');
+}
+
+function handleDrop(e) {
+  e.stopPropagation();
+  var isIteration     = this.classList.contains('Iteration');
+  var elementId       = e.dataTransfer.getData('text');
+  var originalElement = document.getElementById(elementId);
+
+  if(isIteration) {
+    this.querySelector('tbody').appendChild(originalElement)
+  } else {
+    this.insertAdjacentElement('afterend', originalElement);
+  }
+
+  return false;
+}
+
+function handleDragEnd() {
+  this.style.opacity = null;
+
+  var data = JSON.parse(this.getAttribute('data-data'));
+  var iterationEl = this.closest('.Iteration');
+
+  iterationEl.classList.remove('Iteration--over');
+  var overedStories = iterationEl.querySelectorAll('.Story--over');
+
+  [].forEach.call(overedStories, function (story) {
+    story.classList.remove('Story--over');
+  });
+
+  data.iteration_id = iterationEl.getAttribute('data-id');
+  data.position     = Array.from(
+    iterationEl.querySelectorAll('.Story')
+  ).indexOf(this) + 1;
+
+  update_position_remotely(data);
+
+  // [].forEach.call(iterations, function (iteration, index) {
+  //   var stories = iteration.querySelectorAll('.Story');
+
+  //   iteration.classList.remove('Iteration--over');
+  //   [].forEach.call(stories, function (story, index) {
+  //     story.classList.remove('Story--over');
+
+  //   })
+  // })
+}
+
+function add_drag_listener_to_story_element(storyElement) {
+  storyElement.addEventListener('dragstart', handleDragStart, false);
+  storyElement.addEventListener('dragenter', handleDragEnter, false);
+  storyElement.addEventListener('dragover', handleDragOver, false);
+  storyElement.addEventListener('dragleave', handleDragLeave, false);
+  storyElement.addEventListener('drop', handleDrop, false);
+  storyElement.addEventListener('dragend', handleDragEnd, false);
+}
+
+function update_position_remotely(data) {
+  $.ajax({
+    method: 'PATCH',
+    url: '/admin/projects/' + data.project_id + '/stories/' + data.id,
+    data: JSON.stringify({ story: data }),
+    headers: {
+      'X-CSRF-Token': Rails.csrfToken(),
+      'Content-Type': 'application/json',
+      'Accept':       'application/json'
+    }
+  })
+}
+
 /**
  *
  */
@@ -38,14 +143,7 @@ $(document).ready(function() {
   });
 
   /** Function for collapse card */
-  $('[data-toggle="card-collapse"]').on('click', function(e) {
-    var $card = $(this).closest(DIV_CARD);
-
-    $card.toggleClass('card-collapsed');
-
-    e.preventDefault();
-    return false;
-  });
+  $('[data-toggle="card-collapse"]').on('click', handleIterationCollapse);
 
   /** Function for collapse iteration */
   $('[data-toggle="iteration-collapse"').on('click', function (e) {
@@ -153,71 +251,8 @@ $(document).ready(function() {
   var stories = document.querySelectorAll('.Iteration .Story[draggable=true]');
   var iterations = document.querySelectorAll('.Iteration');
   if(stories) {
-    function handleDragStart(e) {
-      this.style.opacity = '0.4';
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text', this.getAttribute('id'));
-    }
-
-    function handleDragEnter(e) {
-      var isIteration = this.classList.contains('Iteration');
-
-      if (isIteration) { return this.classList.add('Iteration--over'); }
-      this.classList.add('Story--over');
-    }
-
-    function handleDragOver(e) {
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-      return false;
-    }
-
-    function handleDragLeave(e) {
-      this.classList.remove('Story--over');
-      this.classList.remove('Iteration--over');
-    }
-
-    function handleDrop(e) {
-      e.stopPropagation();
-      var isIteration     = this.classList.contains('Iteration');
-      var elementId       = e.dataTransfer.getData('text');
-      var originalElement = document.getElementById(elementId);
-
-      if(isIteration) {
-        this.querySelector('tbody').appendChild(originalElement)
-      } else {
-        this.insertAdjacentElement('afterend', originalElement);
-      }
-
-      return false;
-    }
-
-    function handleDragEnd() {
-      this.style.opacity = null;
-      stories = document.querySelectorAll('.Iteration .Story');
-      iterations = document.querySelectorAll('.Iteration');
-
-      [].forEach.call(iterations, function (iteration, index) {
-        var stories = iteration.querySelectorAll('.Story');
-
-        iteration.classList.remove('Iteration--over');
-        [].forEach.call(stories, function (story, index) {
-          story.classList.remove('Story--over');
-          data = JSON.parse(story.getAttribute('data-data'));
-          data.position = index + 1
-          data.iteration_id = iteration.getAttribute('data-id');
-          update_position_remotely(data);
-        })
-      })
-    }
-
     [].forEach.call(stories, function (story) {
-      story.addEventListener('dragstart', handleDragStart, false);
-      story.addEventListener('dragenter', handleDragEnter, false);
-      story.addEventListener('dragover', handleDragOver, false);
-      story.addEventListener('dragleave', handleDragLeave, false);
-      story.addEventListener('drop', handleDrop, false);
-      story.addEventListener('dragend', handleDragEnd, false);
+      add_drag_listener_to_story_element(story);
     });
 
     [].forEach.call(iterations, function (iteration) {
@@ -225,20 +260,7 @@ $(document).ready(function() {
       iteration.addEventListener('dragover', handleDragOver, false);
       iteration.addEventListener('dragleave', handleDragLeave, false);
       iteration.addEventListener('drop', handleDrop, false);
-      iteration.addEventListener('dragend', handleDragEnd, false);
-    })
-
-    function update_position_remotely(data) {
-      $.ajax({
-        method: 'PATCH',
-        url: '/admin/projects/' + data.project_id + '/stories/' + data.id,
-        data: JSON.stringify({ story: data }),
-        headers: {
-          'X-CSRF-Token': Rails.csrfToken(),
-          'Content-Type': 'application/json',
-          'Accept':       'application/json'
-        }
-      })
-    }
+      //iteration.addEventListener('dragend', handleDragEnd, false);
+    });
   }
 });

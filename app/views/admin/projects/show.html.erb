@@ -1,11 +1,13 @@
-<div class="page-header">
-  <h1 class="page-title">
-    Project: <%= @project.name %>
-  </h1>
-  <div class="page-options d-flex">
-    <%= link_to 'New Story', new_project_story_path(@project), class: 'btn btn-secondary' %>
-    <%= link_to 'Done', done_project_iterations_path(@project), class: 'btn btn-secondary' %>
+<div class="Project" data-id="<%= @project.id %>">
+  <div class="page-header">
+    <h1 class="page-title">
+      Project: <%= @project.name %>
+    </h1>
+    <div class="page-options d-flex">
+      <%= link_to 'New Story', new_project_story_path(@project), class: 'btn btn-secondary' %>
+      <%= link_to 'Done', done_project_iterations_path(@project), class: 'btn btn-secondary' %>
+    </div>
   </div>
-</div>
 
-<%= render 'iterations', iterations: @active_iterations %> <br>
+  <%= render collection: @active_iterations, as: :iteration, partial: 'iteration' %>
+</div>

@@ -1,10 +1,14 @@
 development:
-  adapter: async
+  adapter: redis
+  url: redis://localhost:6379/1
+  channel_prefix: AionAgileManager_development
 
 test:
-  adapter: async
+  adapter: redis
+  url: redis://localhost:6379/1
+  channel_prefix: AionAgileManager_test
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  url: <%= ENV['REDISTOGO_URL'] %>
   channel_prefix: AionAgileManager_production

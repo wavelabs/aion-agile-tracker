@@ -21,6 +21,7 @@ gem 'acts_as_commentable'
 gem 'ransack', '~> 1.8', '>= 1.8.8'
 gem 'aasm', '~> 4.12', '>= 4.12.3'
 gem 'acts_as_list'
+gem 'redis'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
