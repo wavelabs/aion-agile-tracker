@@ -23,7 +23,7 @@
               </tr>
             </thead>
             <tbody>
-              <%= render collection: iteration.stories.oder(:position), as: :story, partial: 'admin/projects/story' %>
+              <%= render collection: iteration.stories.order(:position), as: :story, partial: 'admin/projects/story' %>
             </tbody>
           </table>
         </div>
