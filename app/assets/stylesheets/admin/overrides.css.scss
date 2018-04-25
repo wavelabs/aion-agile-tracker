@@ -20,6 +20,11 @@
   @extend .btn-secondary
 }
 
+.close:before {
+  content: "\f00d";
+  font-family: "FontAwesome";
+}
+
 .Iteration {
   .Iteration-collapsable-button {
     color: #9aa0ac;
