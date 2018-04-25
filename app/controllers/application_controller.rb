@@ -5,23 +5,5 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
 
-  def current_account
-    @current_account      ||= find_current_account
-    session[:account_id]    = @current_account&.id
-    @current_account
-  end
-
-  helper_method :current_account, :logged_in?
-
-  private
-
-  def find_current_account
-    current_user.accounts.find(account_id)
-  rescue ActiveRecord::RecordNotFound => e
-    current_user.accounts.first
-  end
-
-  def account_id
-    @account_id ||= session[:account_id]
-  end
+  helper_method :logged_in?
 end

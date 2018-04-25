@@ -21,6 +21,7 @@ Rails.application.routes.draw do
           put 'finish', to: 'iterations#finish'
         end
       end
+      patch 'stories/positions', to: 'positions#update'
       resources :stories do
         resources :comments, only: [:create, :update]
 

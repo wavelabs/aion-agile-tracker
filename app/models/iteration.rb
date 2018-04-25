@@ -24,6 +24,8 @@ class Iteration < ApplicationRecord
   scope :done,    ->() { where('? > end_date', Date.today) }
   scope :from_id, ->(id) { where('id > ?', id) }
 
+  accepts_nested_attributes_for :stories
+
   def self.current
     active.find_by('start_date <= ?', Date.today)
   end

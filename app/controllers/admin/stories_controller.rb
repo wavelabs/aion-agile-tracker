@@ -1,5 +1,7 @@
 module Admin
   class StoriesController < BaseController
+    include BroadcastStories
+
     before_action :set_project
     before_action :set_story,                 only: [:show, :edit, :update, :destroy]
     before_action :set_collaborators,         only: [:new, :edit, :create, :update]
@@ -30,7 +32,7 @@ module Admin
       @story = create_story
 
       if @story.save
-        broadcast_story
+        broadcast_story_create
         redirect_to @project, notice: 'Story was successfully created.'
       else
         render :new
@@ -40,6 +42,7 @@ module Admin
     # PATCH/PUT /stories/1
     def update
       if @story.update(story_params)
+        broadcast_story_update
         respond_to do |format|
           format.html { redirect_to @project, notice: 'Story was successfully updated.' }
           format.json { render json: 'OK' }
@@ -89,16 +92,6 @@ module Admin
         story           = @project.stories.build(create_params)
         story.iteration = @project.find_next_iteration_for_story(story)
         story
-      end
-
-      def broadcast_story
-        iteration_card_html = render_to_string('admin/projects/_iteration', locals: {iteration: @story.iteration}, layout: false)
-        project_row_html    = render_to_string('admin/projects/_story', locals: {story: @story}, layout: false)
-
-        ActionCable.server.broadcast "projects_channel",
-          story: @story.as_json,
-          project_row_html: project_row_html,
-          iteration_card_html: iteration_card_html
       end
   end
 

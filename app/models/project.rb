@@ -26,6 +26,8 @@ class Project < ApplicationRecord
   has_many :labels, through: :stories
   has_many :story_states
 
+  accepts_nested_attributes_for :iterations
+
   has_many :collaborators, through: :stories, class_name: 'User', source: :owners
 
   validates :name, presence: true

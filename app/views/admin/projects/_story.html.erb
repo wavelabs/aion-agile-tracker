@@ -1,6 +1,7 @@
 <tr
   id="Story-<%= story.id %>"
   class="Story <%= story_classes(story) %>"
+  data-position="<%= story.position %>"
   data-data="<%= story.to_json(only: [:id, :position, :iteration_id, :project_id]) %>"
   draggable="<%= !story.last_status? %>">
   <td style="width: 1%;"><%= story_type_icon(story.story_type) %></td>

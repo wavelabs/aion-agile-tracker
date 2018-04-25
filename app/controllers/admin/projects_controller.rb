@@ -5,7 +5,7 @@ module Admin
 
     # GET /projects/1
     def show
-      @active_iterations = @project.active_iterations.includes(stories: [:requester, :owners, :labels]).limit(3)
+      @active_iterations = @project.active_iterations.includes(stories: [:requester, :owners, :labels])
     end
 
     # GET /projects/new

@@ -67,22 +67,34 @@ function handleDrop(e) {
 function handleDragEnd() {
   this.style.opacity = null;
 
-  var data = JSON.parse(this.getAttribute('data-data'));
-  var iterationEl = this.closest('.Iteration');
+  var iterations = document.querySelectorAll('.Iteration');
+  var project_id;
 
-  iterationEl.classList.remove('Iteration--over');
-  var overedStories = iterationEl.querySelectorAll('.Story--over');
+  var data = { iterations_attributes: [] }
 
-  [].forEach.call(overedStories, function (story) {
-    story.classList.remove('Story--over');
+  data.iterations_attributes = [].map.call(iterations, function (iteration) {
+    var iterationId = iteration.getAttribute('data-id');
+    var iterationData = { id: iterationId, stories_attributes: [] };
+    iteration.classList.remove('Iteration--over');
+
+    var stories = iteration.querySelectorAll('.Story');
+    iterationData.stories_attributes = [].map.call(stories, function (story, index) {
+      story.classList.remove('Story--over');
+
+      var storyData = JSON.parse(story.getAttribute('data-data'));
+      storyData.position     = index + 1;
+      storyData.iteration_id = iterationId;
+
+      project_id = storyData.project_id;
+      return storyData;
+    });
+
+    return iterationData;
   });
 
-  data.iteration_id = iterationEl.getAttribute('data-id');
-  data.position     = Array.from(
-    iterationEl.querySelectorAll('.Story')
-  ).indexOf(this) + 1;
+  data.id = project_id
 
-  update_position_remotely(data);
+  update_position_remotely({ project: data });
 
   // [].forEach.call(iterations, function (iteration, index) {
   //   var stories = iteration.querySelectorAll('.Story');
@@ -107,8 +119,8 @@ function add_drag_listener_to_story_element(storyElement) {
 function update_position_remotely(data) {
   $.ajax({
     method: 'PATCH',
-    url: '/admin/projects/' + data.project_id + '/stories/' + data.id,
-    data: JSON.stringify({ story: data }),
+    url: '/admin/projects/' + data.project.id + '/stories/positions',
+    data: JSON.stringify(data),
     headers: {
       'X-CSRF-Token': Rails.csrfToken(),
       'Content-Type': 'application/json',
