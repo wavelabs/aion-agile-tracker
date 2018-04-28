@@ -20,7 +20,7 @@ module Admin
 
     # GET /stories/new
     def new
-      @story = Story.new
+      @story = Story.new(requester_id: current_user.id)
     end
 
     # GET /stories/1/edit
@@ -88,7 +88,7 @@ module Admin
       end
 
       def set_collaborators
-        @collaborators = User.invitation_accepted.from_account(@project.account).pluck(:username, :id)
+        @collaborators = User.from_account(@project.account).pluck(:username, :id)
       end
 
       def create_story

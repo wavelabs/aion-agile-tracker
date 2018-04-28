@@ -13,6 +13,8 @@ class Account < ApplicationRecord
   has_many :users, through: :accounts_users
   has_many :projects
 
+  validates :name, presence: true
+
   scope :owned_by, ->(user) { joins(:users).where(users: {id: user.id}).merge(AccountsUser.admins) }
   scope :belongs,  ->(user) { joins(:users).where(users: {id: user.id}).merge(AccountsUser.users) }
 

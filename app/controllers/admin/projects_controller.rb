@@ -19,15 +19,9 @@ module Admin
 
     # POST /projects
     def create
-      @project = NewProjectBuilder.new
-                                  .assign_attributes(project_params)
-                                  .build
-
-      if @project.save
-        redirect_to @project, notice: 'Project was successfully created.'
-      else
-        render :new
-      end
+      @project = Project.new(project_params)
+      return render(:new) unless @project.save
+      redirect_to @project, notice: 'Project was successfully created.'
     end
 
     # PATCH/PUT /projects/1

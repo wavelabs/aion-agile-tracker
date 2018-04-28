@@ -3,11 +3,6 @@ class NewProjectBuilder
     @model = resource || Project.new
   end
 
-  def assign_account(account)
-    model.account = account
-    self
-  end
-
   def assign_attributes(attrs)
     model.assign_attributes(attrs)
     self
@@ -20,8 +15,4 @@ class NewProjectBuilder
   private
 
   attr_reader :model
-
-  def today
-    @today ||= Date.today
-  end
 end

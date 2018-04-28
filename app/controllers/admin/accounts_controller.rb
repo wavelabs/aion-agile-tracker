@@ -11,7 +11,7 @@ module Admin
 
     # GET /accounts/new
     def new
-      @account = current_user.accounts.build
+      @account = Account.new
     end
 
     # GET /accounts/1/edit
@@ -36,28 +36,16 @@ module Admin
       end
     end
 
-    # PATCH/PUT /accounts/1
-    # PATCH/PUT /accounts/1.json
     def update
-      respond_to do |format|
-        if @account.update(account_params)
-          format.html { redirect_to accounts_path, notice: 'Account was successfully updated.' }
-          format.json { render :show, status: :ok, location: @account }
-        else
-          format.html { render :edit }
-          format.json { render json: @account.errors, status: :unprocessable_entity }
-        end
-      end
+      return render(:edit) unless @account.update(account_params)
+      redirect_to accounts_path, notice: 'Account was successfully updated.'
     end
 
     # DELETE /accounts/1
     # DELETE /accounts/1.json
     def destroy
       @account.destroy
-      respond_to do |format|
-        format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
-        format.json { head :no_content }
-      end
+      redirect_to accounts_url, notice: 'Account was successfully destroyed.'
     end
 
     private
