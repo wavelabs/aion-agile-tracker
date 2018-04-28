@@ -37,6 +37,13 @@ function handleUpdatePositions(data) {
   });
 }
 
+function handleDestroyStory(data) {
+  var $story = document.querySelector('#Story-' + data.story_id);
+  if ($story) {
+    $story.parentNode.removeChild($story);
+  }
+}
+
 App.cable.subscriptions.create("ProjectsChannel", {
   connected: function () {
     console.log('Connected');
@@ -48,6 +55,9 @@ App.cable.subscriptions.create("ProjectsChannel", {
     switch (data.action) {
       case 'POSITIONS_UPDATED':
         handleUpdatePositions(data);
+        break;
+      case 'STORY_DESTROYED':
+        handleDestroyStory(data);
         break;
       case 'STORY_CREATED':
         handleCreateStory(data);

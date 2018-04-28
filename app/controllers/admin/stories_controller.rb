@@ -58,6 +58,7 @@ module Admin
     # DELETE /stories/1
     def destroy
       @story.destroy
+      broadcast_story_destroy(@story)
       redirect_to @project, notice: 'Story was successfully destroyed.'
     end
 

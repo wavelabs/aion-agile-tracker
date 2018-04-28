@@ -24,6 +24,12 @@ module BroadcastStories
         iteration_card_html: iteration_card_html
     end
 
+    def broadcast_story_destroy(story)
+      ActionCable.server.broadcast 'projects_channel',
+        action: 'STORY_DESTROYED',
+        story_id: story.id
+    end
+
     def broadcast_story_positions(project)
       ActionCable.server.broadcast 'projects_channel',
         action:    'POSITIONS_UPDATED',
