@@ -2,14 +2,17 @@
   <h1 class="page-title">
     Dashboard
   </h1>
-  <div class="page-options d-flex">
-    <%= link_to 'New Project', new_project_path, class: 'btn btn-secondary' %>
-  </div>
+  <% if @projects.any? %>
+    <div class="page-options d-flex">
+      <%= link_to 'New Project', new_project_path, class: 'btn btn-secondary' %>
+    </div>
+  <% end %>
 </div>
 
 <div class="row">
   <div class="col-md-12">
     <div class="card">
+      <% if @projects.any? %>
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -41,13 +44,18 @@
                 </td>
                 <td class="text-right">
                   <%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, [:edit, project], class: 'btn btn-info btn-sm' %>
-                  <%= link_to '<i class="fa fa-trash-o"></i> Delete'.html_safe, project, class: 'btn btn-danger btn-sm', method: :delete %>
+                  <%= link_to '<i class="fa fa-trash-o"></i> Delete'.html_safe, project, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } %>
                 </td>
               </tr>
             <% end %>
           </tbody>
         </table>
       </div>
+      <% else %>
+        <div class="card-body">
+          You don't have projects yet. Create one clicking <%= link_to 'here', new_project_path %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

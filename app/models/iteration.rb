@@ -18,7 +18,7 @@
 
 class Iteration < ApplicationRecord
   belongs_to :project
-  has_many :stories
+  has_many :stories, dependent: :destroy
 
   scope :active,  ->() { where('? <= end_date', Date.today) }
   scope :done,    ->() { where('? > end_date', Date.today) }

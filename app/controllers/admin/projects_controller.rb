@@ -42,7 +42,7 @@ module Admin
     # DELETE /projects/1
     def destroy
       @project.destroy
-      redirect_to projects_url, notice: 'Project was successfully destroyed.'
+      redirect_to dashboard_url, notice: 'Project was successfully destroyed.'
     end
 
     private
