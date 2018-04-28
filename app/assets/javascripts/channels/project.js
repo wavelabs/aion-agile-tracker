@@ -6,14 +6,20 @@ function handleUpdateStory(data) {
 }
 
 function handleCreateStory(data) {
-  var iterationEl = document.querySelector('.Iteration[data-id="' + data.story.iteration_id + '"]');
-  if (iterationEl) {
-    var tbodyEl = iterationEl.querySelector('tbody');
-    tbodyEl.insertAdjacentHTML('beforeend', data.project_row_html);
+  var $project    = document.querySelector('.Project');
+  var $iterations = $project.querySelector('.Iterations');
+  var $iteration  = $iterations.querySelector('.Iteration[data-id="' + data.story.iteration_id + '"]');
+  if ($iteration) {
+    var $tbody = $iteration.querySelector('tbody');
+    $tbody.insertAdjacentHTML('beforeend', data.project_row_html);
   } else {
-    iterationEl = document.querySelector('.Iteration:last-child');
-    iterationEl.insertAdjacentHTML('afterend', data.iteration_card_html);
-    iterationEl.querySelector('[data-toggle="iteration-collapse"').addEventListener('click', handleIterationCollapse)
+    $iteration = $iterations.querySelector('.Iteration:last-child');
+    if ($iteration) {
+      $iteration.insertAdjacentHTML('afterend', data.iteration_card_html);
+    } else {
+      $iterations.innerHTML = data.iteration_card_html;
+    }
+    $iterations.querySelector('.Iteration:last-child .Iteration-collapsable-button').addEventListener('click', handleIterationCollapse)
   }
 
   $story = document.querySelector('#Story-'+data.story.id);

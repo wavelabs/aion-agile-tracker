@@ -1,3 +1,6 @@
+/** Constant div card */
+const DIV_CARD = 'div.card';
+
 /**
  *
  */
@@ -12,7 +15,7 @@ var hexToRgba = function(hex, opacity) {
   return 'rgba(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', ' + opacity + ')';
 };
 
-function handleIterationCollapse(e) {
+function handleCardCollapse(e) {
   var $card = $(this).closest(DIV_CARD);
 
   $card.toggleClass('card-collapsed');
@@ -20,6 +23,13 @@ function handleIterationCollapse(e) {
   e.preventDefault();
   return false;
 }
+
+function handleIterationCollapse (e) {
+    var $card = $(this).closest(DIV_CARD);
+    $card.toggleClass('Iteration--collapsed');
+    e.preventDefault();
+    return false;
+  }
 
 function highlight(element) {
   Velocity(element, { backgroundColor: '#ffff99' }, { duration: 300, loop: 1 });
@@ -133,8 +143,6 @@ function update_position_remotely(data) {
  *
  */
 $(document).ready(function() {
-  /** Constant div card */
-  const DIV_CARD = 'div.card';
 
   /** Initialize tooltips */
   $('[data-toggle="tooltip"]').tooltip();
@@ -155,15 +163,10 @@ $(document).ready(function() {
   });
 
   /** Function for collapse card */
-  $('[data-toggle="card-collapse"]').on('click', handleIterationCollapse);
+  $('[data-toggle="card-collapse"]').on('click', handleCardCollapse);
 
   /** Function for collapse iteration */
-  $('[data-toggle="iteration-collapse"').on('click', function (e) {
-    var $card = $(this).closest(DIV_CARD);
-    $card.toggleClass('Iteration--collapsed');
-    e.preventDefault();
-    return false;
-  })
+  $('[data-toggle="iteration-collapse"').on('click', handleIterationCollapse)
 
   /** Function for fullscreen card */
   $('[data-toggle="card-fullscreen"]').on('click', function(e) {
