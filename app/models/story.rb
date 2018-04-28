@@ -14,6 +14,7 @@
 #  story_state  :string
 #  iteration_id :integer
 #  position     :integer
+#  release_date :date
 #
 # Indexes
 #

@@ -19,6 +19,12 @@
         <td><%= story.points %></td>
       </tr>
     <% end %>
+    <% if story.release_date? %>
+      <tr>
+        <th>Release Date:</th>
+        <td><%= story.release_date %></td>
+      </tr>
+    <% end %>
     <tr>
       <th>Story Type:</th>
       <td><%= story_type_icon(story.story_type) %> <%= story.story_type.titleize %></td>

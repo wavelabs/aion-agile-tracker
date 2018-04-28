@@ -20,6 +20,8 @@
   @extend .btn-secondary
 }
 
+.hidden { display:none; }
+
 .close:before {
   content: "\f00d";
   font-family: "FontAwesome";

@@ -78,4 +78,8 @@ module StoriesHelper
   def disable_estimations?(story)
     !story.feature? && !story.new_record?
   end
+
+  def disable_release_date?(story)
+    !story.release? || story.new_record?
+  end
 end

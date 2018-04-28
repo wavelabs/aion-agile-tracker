@@ -247,10 +247,18 @@ $(document).ready(function() {
   var $storyType = $('#story_type');
   if ($storyType.length) {
     $storyType.on('change', function (e) {
-      if (this.value != 'feature') {
-        $('#story_points').attr('disabled', true)
-      } else {
-        $('#story_points').attr('disabled', false)
+      $storyPoints = $('#story_points');
+      $releaseDate = $('#story_release_date');
+
+      $storyPoints.attr('disabled', true);
+      $releaseDate.attr('disabled', true);
+       switch(this.value) {
+        case 'feature':
+          $storyPoints.attr('disabled', false);
+          break;
+        case 'release':
+          $releaseDate.attr('disabled', false);
+          break;
       }
     });
   }
