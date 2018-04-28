@@ -1,10 +1,19 @@
-<h1>Welcome#show</h1>
-<p>Find me in app/views/welcome/show.html.erb</p>
+<section class="bg-primary pb0">
+  <div class="container pt80">
+    <div class="row mb24 mb-xs-0">
+      <div class="col-sm-10 col-sm-offset-1 text-center">
+        <h1 class="large">Aion Agile Tracker</h1>
+        <p class="lead">Easy agile software tracking for your user stories, epics and more...</p>
+      </div>
+    </div>
 
-<% if logged_in? %>
-  <%= link_to :sign_out, destroy_user_session_path, method: :delete %> |
-  <%= link_to :dashboard, dashboard_path %>
-<% else %>
-  <%= link_to :register, new_user_registration_path %> |
-  <%= link_to :login, new_user_session_path %>
-<% end %>
+    <div class="row mb80 mb-xs-24">
+        <div class="col-sm-6 col-sm-offset-3">
+        </div>
+    </div>
+
+    <div class="row">
+      <%= image_tag 'app.png' %>
+    </div>
+  </div>
+</section>

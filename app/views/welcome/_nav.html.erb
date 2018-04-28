@@ -1,0 +1,26 @@
+<div class="nav-container">
+  <nav>
+    <div class="nav-utility">
+      <div class="module left">
+        <i class="fa fa-map-marker"></i> &nbsp;
+        <span class="sub">San Lorenzo 341 7B, San Miguel de Tucumán, Tucumán</span>
+      </div>
+      <div class="module left">
+        <i class="fa fa-envelope">&nbsp;</i>
+        <span class="sub">wavelabs@vafdmd.com</span>
+      </div>
+      <div class="module right">
+        <% if logged_in? %>
+          <%= link_to :dashboard, dashboard_path, class: 'btn btn-sm btn-filled' %>
+        <% else %>
+          <%= link_to :login, new_user_session_path, class: 'btn btn-sm btn-filled' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="nav-bar">
+      <div class="module left">
+        <a href="/">Aion Agile Tracker</a>
+      </div>
+    </div>
+  </nav>
+</div>

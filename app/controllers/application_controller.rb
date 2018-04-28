@@ -6,4 +6,10 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :logged_in?
+
+  protected
+
+  def after_sign_in_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || dashboard_path
+  end
 end
