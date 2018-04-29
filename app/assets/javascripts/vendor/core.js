@@ -286,4 +286,20 @@ $(document).ready(function() {
       //iteration.addEventListener('dragend', handleDragEnd, false);
     });
   }
+
+  var $iterationAcceptedStoriesRow = $('.Iteration-accepted-stories-row');
+  if ($iterationAcceptedStoriesRow.length) {
+    $iterationAcceptedStoriesRow.on('click', function (e) {
+      $(this).parents('.Iteration').removeClass('Iteration--hide-accepted');
+      $(this).parents('.Iteration').addClass('Iteration--show-accepted');
+    });
+  }
+
+  var $iterationHideAcceptedStoriesRow = $('.Iteration-hide-accepted-stories-row');
+  if ($iterationHideAcceptedStoriesRow.length) {
+    $iterationHideAcceptedStoriesRow.on('click', function (e) {
+      $(this).parents('.Iteration').addClass('Iteration--hide-accepted');
+      $(this).parents('.Iteration').removeClass('Iteration--show-accepted');
+    });
+  }
 });

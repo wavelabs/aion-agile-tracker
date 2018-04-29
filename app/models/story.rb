@@ -46,12 +46,19 @@ class Story < ApplicationRecord
   has_many :owners_stories, dependent: :destroy
   has_many :owners, -> { distinct }, through: :owners_stories
 
-  scope :features,  ->()  { where(story_type: 'feature') }
-  scope :releases,  ->()  { where(story_type: 'release') }
-  scope :chores,    ->()  { where(story_type: 'chore') }
+  scope :features,  ->()    { where(story_type: 'feature') }
+  scope :releases,  ->()    { where(story_type: 'release') }
+  scope :chores,    ->()    { where(story_type: 'chore') }
   scope :but_releases, ->() { where.not(story_type: 'release') }
   scope :not_accepted, ->() { where.not(story_state: 'accepted') }
-  scope :estimated, ->() { features.where('points >= 0') }
+  scope :estimated, ->()    { features.where('points >= 0') }
+
+  scope :done, ->() do
+    where(%Q{
+      #{table_name}.story_state = 'accepted' OR
+      ( #{table_name}.story_state = 'finished' AND #{table_name}.story_type = 'chore' )
+    })
+  end
 
   scope :order_by_weight, ->() do
     weight_order = Arel.sql(%Q{

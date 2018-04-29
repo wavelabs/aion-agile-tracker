@@ -1,5 +1,15 @@
 @import 'admin/scaffolds';
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 .btn-accept {
   @extend .btn-success
 }
@@ -33,6 +43,15 @@
     display: inline-block;
   }
 
+  .Iteration-toggle-accepted-row {
+    @extend .bg-accepted;
+    @extend .text-center;
+    @extend .noselect;
+    display: none;
+    cursor: pointer;
+    -webkit-user-select: none;
+  }
+
   &.Iteration--over {
     table { border-bottom: 3px solid black; }
   }
@@ -53,10 +72,31 @@
       @extend .Story--release
     }
   }
+
+  &.Iteration--show-accepted {
+    .Iteration-hide-accepted-stories-row { display: table-row; }
+  }
+
+  &.Iteration--hide-accepted {
+    .Iteration-accepted-stories-row { display: table-row; }
+    .Iteration-hide-accepted-stories-row { display: none; }
+
+    .Story {
+      &.Story--chore {
+        &.Story--finished { display: none; }
+      }
+      &.Story--accepted { display:none; }
+    }
+  }
+
+}
+
+.bg-accepted {
+  background-color: #C7D9B8;
 }
 
 .Story--accepted {
-  background-color: #C7D9B8;
+  @extend .bg-accepted;
 }
 
 .Iteration--done {

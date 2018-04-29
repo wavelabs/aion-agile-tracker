@@ -1,4 +1,4 @@
-<div class="card Iteration <%= 'Iteration--collapsed' unless iteration.current? %>" data-id="<%= iteration.id %>" id="Iteration-<%= iteration.id %>">
+<div class="card Iteration <%= iteration_classes(iteration) %>" data-id="<%= iteration.id %>" id="Iteration-<%= iteration.id %>">
   <div class="table-responsive">
     <table class="table card-table">
       <thead>
@@ -16,6 +16,12 @@
         </tr>
       </thead>
       <tbody>
+        <tr class="Iteration-toggle-accepted-row Iteration-accepted-stories-row">
+          <td colspan="5">Accepted Stories: <%= iteration.count_story_done %></td>
+        </tr>
+        <tr class="Iteration-toggle-accepted-row Iteration-hide-accepted-stories-row">
+          <td colspan="5">Hide Accepted Stories: <%= iteration.count_story_done %></td>
+        </tr>
         <%= render collection: iteration.stories.order(:position), as: :story, partial: 'admin/projects/story' %>
       </tbody>
     </table>
